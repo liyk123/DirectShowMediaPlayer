@@ -1,0 +1,35 @@
+// DSMPMFCHandlers.idl : DSMPMFCHandlers的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DSMPMFCHandlers.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(B72A3C4D-5BD3-449E-8531-E1D051920AA6),
+	pointer_default(unique)
+]
+interface IPreview : IUnknown
+{
+};
+
+[
+	uuid(DF0D9D25-58E5-47AF-98B6-94C87B5B5342),
+	version(1.0),
+]
+library DSMPMFCHandlersLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(55309261-6736-4596-94D6-66A49260630E)
+	]
+	coclass Preview
+	{
+		[default] interface IPreviewHandler;
+	};
+};
+
+import "shobjidl.idl";

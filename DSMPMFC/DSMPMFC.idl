@@ -1,0 +1,29 @@
+// DSMPMFC.idl : DSMPMFC.exe 的类型库源
+
+// 此文件将由 MIDL 编译器处理以产生
+// 类型库(DSMPMFC.tlb)。
+
+[ uuid(3CD90D13-E47D-488F-B799-9CBA044E4F3B), version(1.0) ]
+library DSMPMFC
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	//  CDSMPMFCDoc 的主调度接口
+	
+	[ uuid(25FA09EB-6767-47CC-85C0-F20C3A12DE67) ]
+	dispinterface IDSMPMFC
+	{
+		properties:
+			
+		methods:
+	};
+
+	//  CDSMPMFCDoc 的类信息
+	
+	[ uuid(B3BC2505-D74E-4744-A45B-A0EEE31AE01B) ]
+	coclass CDSMPMFCDoc
+	{
+		[default] dispinterface IDSMPMFC;
+	};
+};

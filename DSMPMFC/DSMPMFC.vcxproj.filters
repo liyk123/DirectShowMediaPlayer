@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="LAVFilters">
+      <UniqueIdentifier>{b7faeeed-b582-48b5-96a6-2ced9ea1d8d0}</UniqueIdentifier>
+      <Extensions>*.dll;*.ax;*.h</Extensions>
+    </Filter>
+    <Filter Include="MediaInfo">
+      <UniqueIdentifier>{27254dad-615e-484a-a7fd-5cbce7dbc722}</UniqueIdentifier>
+      <Extensions>*.dll;*.h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DSMPMFC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DSMPMFCDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DSMPMFCView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDocManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IBitRateInfo.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IBufferInfo.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IDSMResourceBag.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphRebuildDelegate.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyFrameInfo.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IMediaSample3D.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IMediaSideData.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpecifyPropertyPages2.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="IStreamSourceControl.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="ITrackInfo.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="LAVAudioSettings.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="LAVSplitterSettings.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="LAVVideoSettings.h">
+      <Filter>LAVFilters</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaInfoDLL.h">
+      <Filter>MediaInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DSMPMFC.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DSMPMFCDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DSMPMFCView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDocManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="DSMPMFC.idl">
+      <Filter>源文件</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DSMPMFC.reg" />
+    <None Include="res\DSMPMFC.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="MediaInfoDLL.def">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\libbluray.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\swscale-lav-4.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\avcodec-lav-57.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\avfilter-lav-6.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\avformat-lav-57.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\avresample-lav-3.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\avutil-lav-55.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\IntelQuickSyncDecoder.dll">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\LAVAudio.ax">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\LAVSplitter.ax">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="..\..\..\LAVFilters-0.68.1-x86\LAVVideo.ax">
+      <Filter>LAVFilters</Filter>
+    </None>
+    <None Include="MediaInfo.dll">
+      <Filter>MediaInfo</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DSMPMFC.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\DSMPMFCDoc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\DSMPMFC.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\toolbar1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\toolbarp.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\..\..\LAVFilters-0.68.1-x86\LAVFilters.Dependencies.manifest">
+      <Filter>LAVFilters</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>
