@@ -61,4 +61,5 @@ public:
 //	afx_msg void OnFileOpen();
 	bool m_isPlaylist;
 	CMediaFile *m_pmf;
+	CBitmap m_backgraph;
 };

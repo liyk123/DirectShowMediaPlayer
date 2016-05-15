@@ -177,6 +177,11 @@ BOOL CDSMPMFCApp::InitInstance()
 	//  在 SDI 应用程序中，这应在 ProcessShellCommand 之后发生
 	// 启用拖/放
 	m_pMainWnd->DragAcceptFiles();
+	HRESULT hr = CoInitialize(NULL);
+	if (FAILED(hr)) {
+		AfxMessageBox(_T("Error - Can't init COM."));
+		return FALSE;
+	}
 	return TRUE;
 }
 
@@ -184,7 +189,7 @@ int CDSMPMFCApp::ExitInstance()
 {
 	//TODO: 处理可能已添加的附加资源
 	AfxOleTerm(FALSE);
-
+	CoUninitialize();
 	return CWinApp::ExitInstance();
 }
 

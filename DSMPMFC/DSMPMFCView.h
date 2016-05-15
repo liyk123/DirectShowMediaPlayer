@@ -47,6 +47,10 @@ public:
 	afx_msg void OnUpdateBtnPause(CCmdUI *pCmdUI);
 	afx_msg void OnFileInfo();
 	afx_msg void OnUpdateFileInfo(CCmdUI *pCmdUI);
+	afx_msg void OnBtnPause();
+	afx_msg void OnBtnPlay();
+	afx_msg void OnBtnStop();
+	afx_msg void OnPaint();
 };
 
 #ifndef _DEBUG  // DSMPMFCView.cpp 中的调试版本

@@ -84,6 +84,10 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDR_TB_PLAY_CTL         BITMAP                  "res\\toolbarp.bmp"
 
+IDB_BITMAP_BACK         BITMAP                  "back.bmp"
+
+IDB_BITMAP_SHOW         BITMAP                  "show.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -109,6 +113,8 @@ BEGIN
     BUTTON      ID_BTN_PLAY
     BUTTON      ID_BTN_PAUSE
     BUTTON      ID_BTN_STOP
+    BUTTON      ID_BTN_NEXT
+    BUTTON      ID_BTN_BACK
 END
 
 
@@ -202,6 +208,13 @@ BEGIN
     EDITTEXT        IDC_EDIT_FILE_INFO,7,7,295,162,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
+IDD_DIALOGBAR_CTL DIALOGEX 0, 0, 330, 25
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_SLIDER_PRG,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,1,0,329,17,WS_EX_CLIENTEDGE
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -265,6 +278,10 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 169
     END
+
+    IDD_DIALOGBAR_CTL, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -275,6 +292,11 @@ END
 //
 
 IDD_DLG_FILE_INFO AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOGBAR_CTL AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -411,6 +433,12 @@ BEGIN
     ID_BTN_PAUSE            "暂停"
     ID_BTN_STOP             "停止"
     ID_FILE_INFO            "查看文件的属性"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BTN_NEXT             "下一个"
+    ID_BTN_BACK             "上一个"
 END
 
 #endif    // 中文(简体，中国) resources

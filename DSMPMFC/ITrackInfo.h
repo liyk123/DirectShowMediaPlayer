@@ -19,7 +19,7 @@
  */
 
 #pragma once
-
+#include "stdafx.h"
 typedef enum TrackType {
 	TypeVideo    = 1,
 	TypeAudio    = 2,

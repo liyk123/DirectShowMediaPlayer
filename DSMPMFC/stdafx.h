@@ -35,8 +35,10 @@
 #include <string>
 #include <afx.h>
 #include <afxcontrolbars.h>
-//#include <atlbase.h>
-#include <OCIdl.h>
+#include <dshow.h>
+#include <atlbase.h>
+#include <atlcoll.h>
+//#include <OCIdl.h>
 //#include <windows.h>
 
 

@@ -107,6 +107,9 @@
     <ClInclude Include="DlgFileInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Dlgbar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DSMPMFC.cpp">
@@ -140,6 +143,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DlgFileInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dlgbar.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,6 +218,12 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\toolbarp.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="back.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="show.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

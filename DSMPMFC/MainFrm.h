@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "Dlgbar.h"
 class CMainFrame : public CFrameWnd
 {
 	
@@ -32,16 +32,17 @@ public:
 protected:  // 控件条嵌入成员
 	CToolBar          m_wndToolBar;
 	CStatusBar        m_wndStatusBar;
-
+	CDlgbar           m_wnddlgbar;
 // 生成的消息映射函数
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void OnBtnPlay();
-	afx_msg void OnBtnPause();
-	afx_msg void OnBtnStop();
+//	afx_msg void OnBtnPlay();
+//	afx_msg void OnBtnPause();
+//	afx_msg void OnBtnStop();
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 };
 
 

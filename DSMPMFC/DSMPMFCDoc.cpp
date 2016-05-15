@@ -50,6 +50,7 @@ CDSMPMFCDoc::CDSMPMFCDoc()
     EnableAutomation();
     AfxOleLockApp();
 	m_pmf = new CMediaFile;
+	m_backgraph.LoadBitmapW(IDB_BITMAP_BACK);
 }
 
 CDSMPMFCDoc::~CDSMPMFCDoc()
@@ -62,6 +63,10 @@ BOOL CDSMPMFCDoc::OnNewDocument()
 {
     if(!CDocument::OnNewDocument())
         return FALSE;
+	if (m_pmf->isPlaying)
+	{
+		m_pmf->Stop();
+	}
 	while (!this->m_playlist.empty())
 	{
 		this->m_playlist.pop();
@@ -78,6 +83,11 @@ BOOL CDSMPMFCDoc::OnNewDocument()
 
 void CDSMPMFCDoc::Serialize(CArchive& ar)
 {
+	CString tmpstr;
+	tmpstr.Append(ar.m_strFileName);
+	tmpstr = tmpstr.Right(tmpstr.GetLength() - tmpstr.ReverseFind('.'));
+	auto t = tmpstr.Compare(L".dsplist");
+	m_isPlaylist = (t == 0) ? true : false;
     if(ar.IsStoring())
     {
         // TODO: 在此添加存储代码
@@ -91,6 +101,7 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
 				m_playlist.pop();
 			}
 		}
+		
     }
     else
     {
@@ -101,15 +112,17 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
 			while (ar.ReadString(str))
 			{
 				TRACE(str+L"\n");
+				str=str.Mid(1, str.GetLength());
 				m_playlist.push(str);
 			}
+			
 		}
 		else
 		{
 			str = ar.m_strFileName;
 			m_playlist.push(str);
-			m_pmf->name = str;
 		}
+		
     }
 	
 }
@@ -193,59 +206,5 @@ BOOL CDSMPMFCDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	m_isPlaylist = (t == 0) ? true : false;
     if(!CDocument::OnOpenDocument(lpszPathName))
         return FALSE;
-	//if (t == 0)
-	//{
-	//	TRACE("The file is playlist!\n");
-	//	m_isPlaylist = true;
-	//	//if (this->AnalizePlaylist(lpszPathName) == S_OK)
-	//		//TRACE("Analization is sucessfull!\n");
-	//	// TODO:  在此添加您专用的创建代码
-	//}
-	//else
-	//	m_isPlaylist = false;
     return TRUE;
 }
-
-
-// 分析播放列表文件
-//HRESULT CDSMPMFCDoc::AnalizePlaylist(LPCTSTR lpszPathName)
-//{
-//	CStdioFile pf;
-//	CString line = L"";
-//	setlocale(LC_ALL, "chs");
-//
-//	try
-//	{
-//		pf.Open(lpszPathName, CFile::modeReadWrite, NULL);
-//
-//		while (pf.ReadString(line))
-//		{
-//			this->m_playlist.push(line);
-//			TRACE(L"%s\n", this->m_playlist.front());
-//		}
-//	}
-//	catch (CException* e)
-//	{
-//		e->ReportError();
-//		return E_UNEXPECTED;
-//	}
-//
-//	setlocale(LC_ALL, "C");
-//	//TRACE(pf.GetFileName().GetString());
-//	pf.Close();
-//	return S_OK;
-//}
-
-
-//void CDSMPMFCDoc::OnFileOpen()
-//{
-//	// TODO: 在此添加命令处理程序代码auto pdoc = GetDocument();
-//	auto pdoc = this;
-//	CString strFilter = L"支持的音频格式|*.mp3; *.wav; *.aac; *.wma; *.flac|支持的视频格式|*.mp4; *.wmv; *.avi; *.mkv|播放列表|*.dsplist|所有文件|*.*||";
-//	CFileDialog fdlg(TRUE, NULL, NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, strFilter, NULL);
-//	if (fdlg.DoModal() == IDOK)
-//	{
-//		SetPathName(fdlg.GetPathName());
-//	}
-//
-//}
