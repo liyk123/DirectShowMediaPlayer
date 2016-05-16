@@ -158,26 +158,8 @@ void CMediaFile::Play(HWND hwndView)
 		TRACE("%d\t%d\n", width, height);
 		// 获得显示窗体的客户区尺寸
 		::GetClientRect(hwndView, &rcDest);
-		int lwidth=rcDest.right, lheight=rcDest.bottom;
-		int xPos = 0, yPos = 0;
 		//设置destination尺寸
-		if (rcSrc.right * 10 / rcSrc.bottom > rcDest.right * 10 / rcDest.bottom)
-		{
-			lwidth = rcDest.right;
-			lheight = int(lwidth*(rcSrc.bottom * 1.0/ rcSrc.right)) ;
-			//lheight = lwidth*(9000 / 16)/1000;
-			yPos = rcDest.bottom - lheight;
-			yPos >>= 1;
-		}
-		else
-		{
-			lheight = rcDest.bottom;
-			lwidth = int(lheight*(rcSrc.right * 1.0 / rcSrc.bottom));
-			//lwidth = lheight*(16000 / 9)/1000;
-			xPos = rcDest.right - lwidth;
-			xPos >>= 1;
-		}
-		SetRect(&rcDest, xPos, yPos, lwidth, lheight);
+		SetRect(&rcDest, 0, 0, rcDest.right, rcDest.bottom);
 		TRACE("%d\t%d\t%f\n", rcDest.right, rcDest.bottom, width*1.0 / height);
 		// 视频定位
 		g_pWc->SetAspectRatioMode(VMR_ARMODE_LETTER_BOX);
@@ -185,19 +167,6 @@ void CMediaFile::Play(HWND hwndView)
 		
 	}
 
-	//HWND screen_hwnd = NULL;
-	//RECT windowRect;
-	//screen_hwnd = GetSafeHwnd();
-	//::GetClientRect(screen_hwnd, &windowRect);
-	//GetDocument()->m_pmf->pWindow->put_Visible(OAFALSE);
-	//GetDocument()->m_pmf->pWindow->put_Owner((OAHWND)screen_hwnd);
-	//GetDocument()->m_pmf->pWindow->put_Left(0);
-	//GetDocument()->m_pmf->pWindow->put_Top(0);
-	//GetDocument()->m_pmf->pWindow->put_Width(windowRect.right - windowRect.left);
-	//GetDocument()->m_pmf->pWindow->put_Height(windowRect.bottom - windowRect.top);
-	//GetDocument()->m_pmf->pWindow->put_WindowStyle(WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_THICKFRAME);
-	//GetDocument()->m_pmf->pWindow->put_MessageDrain((OAHWND)screen_hwnd);//Receive Message
-	//GetDocument()->m_pmf->pWindow->put_Visible(OATRUE);
 	HWND dlg_hwnd = NULL;
 	dlg_hwnd = hwndView;
 	pEvent->SetNotifyWindow((OAHWND)dlg_hwnd, WM_USER + 20, 0);

@@ -230,6 +230,7 @@ Copy  "$(ProjectDir)*.manifest"  "$(OutDir)"</Command>
     <ClInclude Include="MediaFile.h" />
     <ClInclude Include="MediaInfoDLL.h" />
     <ClInclude Include="MyDocManager.h" />
+    <ClInclude Include="NiceSlider.h" />
     <ClInclude Include="PictureFile.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -246,6 +247,7 @@ Copy  "$(ProjectDir)*.manifest"  "$(OutDir)"</Command>
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MediaFile.cpp" />
     <ClCompile Include="MyDocManager.cpp" />
+    <ClCompile Include="NiceSlider.cpp" />
     <ClCompile Include="PictureFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

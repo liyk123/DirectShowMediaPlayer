@@ -1,5 +1,5 @@
 #pragma once
-
+#include "NiceSlider.h"
 
 // CDlgbar 对话框
 
@@ -10,7 +10,7 @@ class CDlgbar : public CDialogBar
 public:
 	CDlgbar(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CDlgbar();
-
+	CNiceSliderCtrl m_sctl;
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_DIALOGBAR_CTL };
@@ -21,4 +21,6 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 	afx_msg LRESULT OnInitdialog(WPARAM wParam, LPARAM lParam);
+public:
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 };

@@ -110,6 +110,9 @@
     <ClInclude Include="Dlgbar.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NiceSlider.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DSMPMFC.cpp">
@@ -146,6 +149,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Dlgbar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NiceSlider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
