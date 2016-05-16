@@ -203,3 +203,17 @@ void CMediaFile::Stop()
 	isPlaying = false;
 	isPaused = false;
 }
+
+
+HRESULT CMediaFile::Seek(int nPos)
+{
+	double pos_bar = 0.0;
+	__int64 duration = 0;
+	__int64 pos_time = 0;
+	pos_bar = (double)nPos / 1000.0;
+	pSeeking->GetDuration(&duration);
+	pos_time = (__int64)(pos_bar*duration);
+	__int64 position = pos_time;
+	HRESULT hr = pSeeking->SetPositions(&position, AM_SEEKING_AbsolutePositioning | AM_SEEKING_SeekToKeyFrame,0, AM_SEEKING_NoPositioning);
+	return S_OK;
+}

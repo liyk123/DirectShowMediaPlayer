@@ -5,6 +5,7 @@
 #include "DSMPMFC.h"
 #include "Dlgbar.h"
 #include "afxdialogex.h"
+#include "MainFrm.h"
 
 // CDlgbar 对话框
 
@@ -59,6 +60,11 @@ void CDlgbar::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	//CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
 	//CDSMPMFCView* pView = (CDSMPMFCView*)pFrame->GetActiveView();
-	
+	CMainFrame* pFrame = (CMainFrame*)GetParentFrame();
+	CDSMPMFCDoc* pDoc = (CDSMPMFCDoc*)pFrame->GetActiveDocument();
+	if (!pDoc->m_pmf->isPlaying)
+		m_sctl.SetPos(0);
+	else
+		pDoc->m_pmf->Seek(m_sctl.GetPos());
 	CDialogBar::OnHScroll(nSBCode, nPos, pScrollBar);
 }

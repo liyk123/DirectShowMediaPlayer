@@ -29,6 +29,7 @@ public:
 	virtual ~CMediaFile();
 	void Play(HWND hwndView);
 	void Stop();
+	HRESULT Seek(int nPos);
 };
 
 

@@ -276,28 +276,8 @@ void CDSMPMFCView::OnPaint()
         SetRect(&rcSrc, 0, 0, GetDocument()->m_pmf->width, GetDocument()->m_pmf->height);
         // 获得显示窗体的客户区尺寸
         ::GetClientRect(hwnd, &rcDest);
-        int lwidth = rcDest.right, lheight = rcDest.bottom;
-        int xPos = 0, yPos = 0;
-
         //设置destination尺寸
-        if(rcSrc.right * 10 / rcSrc.bottom > rcDest.right * 10 / rcDest.bottom)
-        {
-            lwidth = rcDest.right;
-            lheight = lwidth * 1000 / rcSrc.right * (rcSrc.bottom)/1000;
-            //lheight = lwidth*(9000 / 16)/1000;
-            yPos = rcDest.bottom - lheight;
-            yPos >>= 1;
-        }
-        else
-        {
-            lheight = rcDest.bottom;
-            lwidth = lheight * 1000 / rcSrc.bottom * (rcSrc.right)/1000;
-            //lwidth = lheight*(16000 / 9)/1000;
-            xPos = rcDest.right - lwidth;
-            xPos >>= 1;
-        }
-
-        SetRect(&rcDest, xPos, yPos, lwidth, lheight);
+        SetRect(&rcDest, 0, 0, rcDest.right, rcDest.bottom);
         // 视频定位
 		//g_pWc->SetAspectRatioMode(VMR_ARMODE_LETTER_BOX);
         HRESULT hr = g_pWc->SetVideoPosition(&rcSrc, &rcDest);

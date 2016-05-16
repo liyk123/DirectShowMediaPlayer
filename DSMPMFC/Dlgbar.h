@@ -1,6 +1,6 @@
 #pragma once
 #include "NiceSlider.h"
-
+#include "DSMPMFCDoc.h"
 // CDlgbar ¶Ô»°¿ò
 
 class CDlgbar : public CDialogBar
