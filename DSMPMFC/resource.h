@@ -13,7 +13,6 @@
 #define IDB_BITMAP1                     317
 #define IDB_BITMAP_SHOW                 317
 #define IDC_EDIT_FILE_INFO              1000
-#define IDC_SLIDER1                     1001
 #define IDC_SLIDER_PRG                  1001
 #define ID_BTN_PLAY                     32774
 #define ID_BTN_PAUSE                    32775
@@ -25,13 +24,17 @@
 #define ID_FILE_INFO                    32781
 #define ID_BTN_NEXT                     32785
 #define ID_BTN_BACK                     32790
+#define ID_32791                        32791
+#define ID_32792                        32792
+#define ID_32793                        32793
+#define ID_BTN_FS                       32794
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
-#define _APS_NEXT_COMMAND_VALUE         32791
+#define _APS_NEXT_COMMAND_VALUE         32795
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

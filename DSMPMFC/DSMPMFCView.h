@@ -14,7 +14,7 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	CDSMPMFCDoc* GetDocument() const;
-
+	CSliderCtrl* m_pctrl;
 // 操作
 public:
 
@@ -51,6 +51,14 @@ public:
 	afx_msg void OnBtnPlay();
 	afx_msg void OnBtnStop();
 	afx_msg void OnPaint();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	virtual void OnInitialUpdate();
+	afx_msg void OnBtnNext();
+	afx_msg void OnBtnBack();
+	afx_msg void OnUpdateBtnBack(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateBtnNext(CCmdUI *pCmdUI);
+	afx_msg void OnBtnFs();
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
 #ifndef _DEBUG  // DSMPMFCView.cpp 中的调试版本

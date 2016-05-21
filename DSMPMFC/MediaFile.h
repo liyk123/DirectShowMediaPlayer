@@ -30,6 +30,7 @@ public:
 	void Play(HWND hwndView);
 	void Stop();
 	HRESULT Seek(int nPos);
+	void Pause();
 };
 
 

@@ -212,8 +212,14 @@ HRESULT CMediaFile::Seek(int nPos)
 	__int64 pos_time = 0;
 	pos_bar = (double)nPos / 1000.0;
 	pSeeking->GetDuration(&duration);
-	pos_time = (__int64)(pos_bar*duration);
-	__int64 position = pos_time;
+	__int64 position = (__int64)(pos_bar*duration);
 	HRESULT hr = pSeeking->SetPositions(&position, AM_SEEKING_AbsolutePositioning | AM_SEEKING_SeekToKeyFrame,0, AM_SEEKING_NoPositioning);
-	return S_OK;
+	return hr;
+}
+
+
+void CMediaFile::Pause()
+{
+	pControl->Pause();
+	isPaused = true;
 }

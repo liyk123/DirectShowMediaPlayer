@@ -13,6 +13,8 @@
 #include "DSMPMFCView.h"
 #include "DlgFileInfo.h"
 #include "MediaInfoDLL.h"
+#include "MainFrm.h"
+//#include "Dlgbar.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -37,6 +39,13 @@ BEGIN_MESSAGE_MAP(CDSMPMFCView, CView)
     ON_COMMAND(ID_BTN_PLAY, &CDSMPMFCView::OnBtnPlay)
     ON_COMMAND(ID_BTN_STOP, &CDSMPMFCView::OnBtnStop)
     ON_WM_PAINT()
+    ON_WM_TIMER()
+    ON_COMMAND(ID_BTN_NEXT, &CDSMPMFCView::OnBtnNext)
+    ON_COMMAND(ID_BTN_BACK, &CDSMPMFCView::OnBtnBack)
+    ON_UPDATE_COMMAND_UI(ID_BTN_BACK, &CDSMPMFCView::OnUpdateBtnBack)
+    ON_UPDATE_COMMAND_UI(ID_BTN_NEXT, &CDSMPMFCView::OnUpdateBtnNext)
+    ON_COMMAND(ID_BTN_FS, &CDSMPMFCView::OnBtnFs)
+    ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 // CDSMPMFCView 构造/析构
@@ -68,36 +77,7 @@ void CDSMPMFCView::OnDraw(CDC* pDC)
         return;
 
     // TODO: 在此处为本机数据添加绘制代码
-//    CRect rect;
-//    CDC memDC;
-//    BITMAP bi;
-//    pDoc->m_backgraph.GetObjectW(sizeof(bi), &bi);
-//    memDC.CreateCompatibleDC(pDC);
-//    memDC.SelectObject(&pDoc->m_backgraph);
-//    GetClientRect(&rect);
-//    int width = 0, height = 0;
-//    int xPos = 0, yPos = 0;
-//
-//    if(rect.Width() * 10 / rect.Height() > bi.bmWidth * 10 / bi.bmHeight)
-//    {
-//        height = rect.Height();
-//        width = height * (bi.bmWidth * 1000 / bi.bmHeight) / 1000;
-//        xPos = rect.Width() - width;
-//        xPos = xPos >> 1;
-//    }
-//    else
-//    {
-//        width = rect.Width();
-//        height = width * (bi.bmHeight * 1000 / bi.bmWidth) / 1000;
-//        yPos = rect.Height() - height;
-//        yPos = yPos >> 1;
-//    }
-//
-////  pDC->BitBlt(0, 0, rect.Width(), rect.Height(), &memDC, 0, 0, SRCCOPY);
-//    pDC->StretchBlt(xPos, yPos, width, height, &memDC, 0, 0, bi.bmWidth , bi.bmHeight, SRCCOPY);
-//    CString txt;
-//    txt.Format(L"%d:%d", width, height);
-//    pDC->DrawTextW(txt, rect, 0);
+
 }
 
 
@@ -173,8 +153,9 @@ void CDSMPMFCView::OnUpdateBtnStop(CCmdUI *pCmdUI)
         pCmdUI->Enable(FALSE);
     else
         pCmdUI->Enable(TRUE);
-	if (!GetDocument()->m_pmf->isPlaying)
-		pCmdUI->Enable(FALSE);
+
+    if(!GetDocument()->m_pmf->isPlaying)
+        pCmdUI->Enable(FALSE);
 }
 
 
@@ -197,7 +178,7 @@ void CDSMPMFCView::OnFileInfo()
     CDlgFileInfo dlg;
     MediaInfoDLL::MediaInfo mi;
     MediaInfoDLL::String str = mi.Option(L"Info_Version");
-    auto tstr = GetDocument()->m_playlist.front().GetString();
+    auto tstr = GetDocument()->m_playlist.at(GetDocument()->m_selector).GetString();
     mi.Open(tstr);
     mi.Option(L"Complete");
     str += L"\t\r\n";
@@ -221,23 +202,30 @@ void CDSMPMFCView::OnUpdateFileInfo(CCmdUI *pCmdUI)
 void CDSMPMFCView::OnBtnPause()
 {
     // TODO: 在此添加命令处理程序代码
-    GetDocument()->m_pmf->pControl->Pause();
-    GetDocument()->m_pmf->isPaused = true;
+    GetDocument()->m_pmf->Pause();
 }
 
 
 void CDSMPMFCView::OnBtnPlay()
 {
     // TODO: 在此添加命令处理程序代码
-	if(!GetDocument()->m_pmf->isPlaying)
-		GetDocument()->m_pmf->name = GetDocument()->m_playlist.front();
+    if(!GetDocument()->m_pmf->isPlaying)
+    {
+		CString name_t = GetDocument()->m_playlist.at(GetDocument()->m_selector);
+        GetDocument()->m_pmf->name = name_t;
+		GetParent()->SetWindowTextW(name_t);
+    }
+
     GetDocument()->m_pmf->Play(GetSafeHwnd());
+    SetTimer(1, 1000, NULL);
 }
 
 
 void CDSMPMFCView::OnBtnStop()
 {
     // TODO: 在此添加命令处理程序代码
+    KillTimer(1);
+    m_pctrl->SetPos(0);
     GetDocument()->m_pmf->Stop();
 }
 
@@ -256,10 +244,10 @@ void CDSMPMFCView::OnPaint()
     auto g_pWc = pf->ppWc;
     SetRect(&g_rcDest, 0, 0, rcClient.bottom - pf->width, rcClient.top - pf->height);
 
-    if(g_pWc != NULL&&pf->width+pf->height)
+    if(g_pWc != NULL && pf->width + pf->height)
     {
         // 查找窗体需要重绘的客户区，该区域应该减去视频显示的区域
-        // (这里假设g_rcDest 是已经计算好了的区域)
+        // g_rcDest 是已经计算好了的区域
         HRGN rgnClient = CreateRectRgnIndirect(&rcClient);
         HRGN rgnVideo = CreateRectRgnIndirect(&g_rcDest);
         CombineRgn(rgnClient, rgnClient, rgnVideo, RGN_DIFF);
@@ -271,16 +259,11 @@ void CDSMPMFCView::OnPaint()
         DeleteObject(rgnClient);
         DeleteObject(rgnVideo);
         // 请求VMR to 重绘视频
-        RECT rcSrc, rcDest;
+        RECT rcSrc;
         // 设置Source尺寸
-        SetRect(&rcSrc, 0, 0, GetDocument()->m_pmf->width, GetDocument()->m_pmf->height);
-        // 获得显示窗体的客户区尺寸
-        ::GetClientRect(hwnd, &rcDest);
-        //设置destination尺寸
-        SetRect(&rcDest, 0, 0, rcDest.right, rcDest.bottom);
+        SetRect(&rcSrc, 0, 0, pf->width, pf->height);
         // 视频定位
-		//g_pWc->SetAspectRatioMode(VMR_ARMODE_LETTER_BOX);
-        HRESULT hr = g_pWc->SetVideoPosition(&rcSrc, &rcDest);
+        HRESULT hr = g_pWc->SetVideoPosition(&rcSrc, &rcClient);
         hr = g_pWc->RepaintVideo(hwnd, dc);
     }
     else  // 没有视频显示，重绘整个客户区
@@ -295,4 +278,196 @@ void CDSMPMFCView::OnPaint()
     //GetClientRect(rect);
     //dc.DrawText(str, rect, 0);
     // 不为绘图消息调用 CView::OnPaint()
+}
+
+
+void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
+{
+    // TODO: 在此添加消息处理程序代码和/或调用默认值
+    if(nIDEvent == 1)
+    {
+        CString curtimestr = L"00:00:00", durationstr = L"00:00:00";
+        long long curtime = 0;
+        long long duration = 0;
+        int tns, thh, tmm, tss;
+        int progress;
+        CMainFrame* pFrame = (CMainFrame*)GetParent();
+        CStatusBar* pSbar = pFrame->MainFrameGetStBar();
+        auto pSeek = GetDocument()->m_pmf->pSeeking;
+        //ms
+        pSeek->GetCurrentPosition(&curtime);
+
+        if(curtime != 0)
+        {
+            //change to second
+            tns = int(curtime / 10000000);
+            thh = tns / 3600;
+            tmm = (tns % 3600) / 60;
+            tss = (tns % 60);
+            curtimestr.Format(_T("%02d:%02d:%02d"), thh, tmm, tss);
+            //m_curtime.SetWindowText(curtimestr);
+            //pSbar->SetPaneText(0, curtimestr);
+        }
+
+        pSeek->GetDuration(&duration);
+
+        if(duration != 0)
+        {
+            tns = int(duration / 10000000);
+            thh = tns / 3600;
+            tmm = (tns % 3600) / 60;
+            tss = (tns % 60);
+            durationstr.Format(_T("%02d:%02d:%02d"), thh, tmm, tss);
+            //m_duration.SetWindowText(durationstr);
+            progress = int(curtime * 1000 / duration);
+            m_pctrl->SetPos(progress);
+            TRACE("%d\n", m_pctrl->GetPos());
+        }
+		
+
+        pSbar->SetPaneText(0, curtimestr + L"/" + durationstr);
+		if (curtime == duration)
+			OnBtnStop();
+		
+    }
+
+    CView::OnTimer(nIDEvent);
+}
+
+
+void CDSMPMFCView::OnInitialUpdate()
+{
+    CView::OnInitialUpdate();
+    // TODO: 在此添加专用代码和/或调用基类
+    m_pctrl = (CSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_PRG));
+}
+
+
+void CDSMPMFCView::OnBtnNext()
+{
+    // TODO: 在此添加命令处理程序代码
+    if(GetDocument()->m_isPlaylist && GetDocument()->m_playlist.size() > 1)
+    {
+        if(GetDocument()->m_selector + 1 < GetDocument()->m_playlist.size())
+            GetDocument()->m_selector++;
+    }
+
+    if(GetDocument()->m_pmf->isPlaying)
+        OnBtnStop();
+
+    OnBtnPlay();
+}
+
+
+void CDSMPMFCView::OnBtnBack()
+{
+    // TODO: 在此添加命令处理程序代码
+    if(GetDocument()->m_isPlaylist && GetDocument()->m_playlist.size() > 1)
+    {
+        if(GetDocument()->m_selector > 0)
+            GetDocument()->m_selector--;
+    }
+
+    if(GetDocument()->m_pmf->isPlaying)
+        OnBtnStop();
+
+    OnBtnPlay();
+}
+
+
+void CDSMPMFCView::OnUpdateBtnBack(CCmdUI *pCmdUI)
+{
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    if(GetDocument()->m_playlist.size() < 2)
+        pCmdUI->Enable(FALSE);
+    else
+        pCmdUI->Enable(TRUE);
+}
+
+
+void CDSMPMFCView::OnUpdateBtnNext(CCmdUI *pCmdUI)
+{
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    if(GetDocument()->m_playlist.size() < 2)
+        pCmdUI->Enable(FALSE);
+    else
+        pCmdUI->Enable(TRUE);
+}
+
+
+void CDSMPMFCView::OnBtnFs()
+{
+    // TODO: 在此添加命令处理程序代码
+    CMainFrame* pFrame = (CMainFrame*)GetParent();
+
+    if(pFrame->m_bFullScreenMode == FALSE)
+        pFrame->FullScreenModeOn();
+    else
+        pFrame->FullScreenModeOff();
+}
+
+
+void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+    // TODO: 在此添加消息处理程序代码和/或调用默认值
+    //AfxMessageBox(L"KEYDOWN");
+    switch(nChar)
+    {
+        case VK_F11:
+            {
+                OnBtnFs();
+                break;
+            }
+
+        case VK_F9:
+            {
+				OnFileInfo();
+                break;
+            }
+		case VK_SPACE:
+			{
+				if (!GetDocument()->m_playlist.empty())
+				{
+					if (GetDocument()->m_pmf->isPlaying && !GetDocument()->m_pmf->isPaused)
+						OnBtnPause();
+					else
+						OnBtnPlay();
+				}
+				break;
+			}
+		case 'S':
+		{
+			if (GetDocument()->m_pmf->isPlaying)
+				OnBtnStop();
+			break;
+		}
+        case VK_RIGHT:
+            {
+                int nPos = m_pctrl->GetPos() + 50;
+
+                if(nPos > 1000)
+                    nPos = 1000;
+
+                m_pctrl->SetPos(nPos);
+                GetDocument()->m_pmf->Seek(nPos);
+                break;
+            }
+
+        case VK_LEFT:
+            {
+                int nPos = m_pctrl->GetPos() - 50;
+
+                if(nPos < 0)
+                    nPos = 0;
+
+                m_pctrl->SetPos(nPos);
+                GetDocument()->m_pmf->Seek(nPos);
+                break;
+            }
+
+        default:
+            break;
+    }
+
+    CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }

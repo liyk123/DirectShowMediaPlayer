@@ -64,7 +64,7 @@ void CDlgbar::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	CDSMPMFCDoc* pDoc = (CDSMPMFCDoc*)pFrame->GetActiveDocument();
 	if (!pDoc->m_pmf->isPlaying)
 		m_sctl.SetPos(0);
-	else
+	else if(nSBCode== SB_THUMBPOSITION)
 		pDoc->m_pmf->Seek(m_sctl.GetPos());
 	CDialogBar::OnHScroll(nSBCode, nPos, pScrollBar);
 }

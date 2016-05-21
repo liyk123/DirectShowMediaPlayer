@@ -7,7 +7,7 @@
 #include "AudioFile.h"
 #include "PictureFile.h"
 #include "VideoFile.h"
-#include <queue>
+#include <deque>
 class CDSMPMFCDoc : public CDocument
 {
 protected: // 仅从序列化创建
@@ -54,7 +54,7 @@ protected:
 #endif // SHARED_HANDLERS
 public:
 	// 播放列表
-	std::queue<CString> m_playlist;
+	std::deque<CString> m_playlist;
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	// 分析播放列表文件
 //	HRESULT AnalizePlaylist(LPCTSTR lpszPathName);
@@ -62,4 +62,5 @@ public:
 	bool m_isPlaylist;
 	CMediaFile *m_pmf;
 	CBitmap m_backgraph;
+	UINT32 m_selector;
 };

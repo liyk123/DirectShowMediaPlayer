@@ -46,11 +46,12 @@ END_INTERFACE_MAP()
 CDSMPMFCDoc::CDSMPMFCDoc()
 	: m_isPlaylist(false)
 {
-    // TODO: 在此添加一次性构造代码
-    EnableAutomation();
-    AfxOleLockApp();
+	// TODO: 在此添加一次性构造代码
+	EnableAutomation();
+	AfxOleLockApp();
 	m_pmf = new CMediaFile;
 	m_backgraph.LoadBitmapW(IDB_BITMAP_BACK);
+	m_selector = 0;
 }
 
 CDSMPMFCDoc::~CDSMPMFCDoc()
@@ -67,10 +68,7 @@ BOOL CDSMPMFCDoc::OnNewDocument()
 	{
 		m_pmf->Stop();
 	}
-	while (!this->m_playlist.empty())
-	{
-		this->m_playlist.pop();
-	}
+	m_playlist.clear();
     // TODO: 在此添加重新初始化代码
     // (SDI 文档将重用该文档)
     return TRUE;
@@ -98,7 +96,8 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
 				//ar << m_playlist.front() << "\n";
 				ar.WriteString(m_playlist.front());
 				ar << "\r";
-				m_playlist.pop();
+				m_playlist.pop_front();
+				
 			}
 		}
 		
@@ -106,21 +105,22 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
     else
     {
         // TODO: 在此添加加载代码
+		m_selector = 0;
 		CString str = L"";
 		if (m_isPlaylist)
 		{
 			while (ar.ReadString(str))
 			{
 				TRACE(str+L"\n");
-				str=str.Mid(1, str.GetLength());
-				m_playlist.push(str);
+				str=str.Mid(str.Find(L"\"",0)+1);
+				m_playlist.push_back(str);
 			}
 			
 		}
 		else
 		{
 			str = ar.m_strFileName;
-			m_playlist.push(str);
+			m_playlist.push_back(str);
 		}
 		
     }
@@ -197,8 +197,7 @@ void CDSMPMFCDoc::Dump(CDumpContext& dc) const
 
 BOOL CDSMPMFCDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
-	while (!m_playlist.empty())
-		m_playlist.pop();
+	m_playlist.clear();
 	CString tmpstr;
 	tmpstr.Append(lpszPathName);
 	tmpstr = tmpstr.Right(tmpstr.GetLength() - tmpstr.ReverseFind('.'));

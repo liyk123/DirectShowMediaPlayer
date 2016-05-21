@@ -114,9 +114,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>Copy  "$(ProjectDir)*.dll"  "$(OutDir)"
-Copy  "$(ProjectDir)*.ax"  "$(OutDir)"
-Copy  "$(ProjectDir)*.manifest"  "$(OutDir)"</Command>
+      <Command>Copy  "$(ProjectDir)LAVFilters-0.68.1-x86\*.*"  "$(OutDir)"
+Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

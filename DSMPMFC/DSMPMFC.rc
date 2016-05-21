@@ -142,16 +142,20 @@ BEGIN
     END
     POPUP "控制(&C)"
     BEGIN
-        MENUITEM "播放(&P)",                      ID_BTN_PLAY
+        MENUITEM "播放(&A)",                      ID_BTN_PLAY
         MENUITEM "暂停(&P)",                      ID_BTN_PAUSE
         MENUITEM "停止(&S)",                      ID_BTN_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "下一个(&N)",                     ID_BTN_NEXT
+        MENUITEM "上一个(&B)",                     ID_BTN_BACK
     END
     POPUP "查看(&V)"
     BEGIN
         MENUITEM "工具栏(&T)",                     ID_VIEW_TOOLBAR
         MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
-        MENUITEM "文件信息(&I)",                    ID_FILE_INFO
+        MENUITEM "文件信息(&I)\tF9",                ID_FILE_INFO
+        MENUITEM "全屏(&F)",                      ID_BTN_FS
     END
     POPUP "帮助(&H)"
     BEGIN
@@ -440,6 +444,7 @@ STRINGTABLE
 BEGIN
     ID_BTN_NEXT             "下一个"
     ID_BTN_BACK             "上一个"
+    ID_BTN_FS               "全屏显示"
 END
 
 #endif    // 中文(简体，中国) resources

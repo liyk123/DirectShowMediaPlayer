@@ -42,7 +42,17 @@ public:
 //	afx_msg void OnBtnPlay();
 //	afx_msg void OnBtnPause();
 //	afx_msg void OnBtnStop();
+//	CDlgbar* pBar;
+	CStatusBar *MainFrameGetStBar();
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
+	BOOL m_bFullScreenMode;
+private:
+	WINDOWPLACEMENT m_OldWndPlacement;
+	CRect m_FullScreenRect;
+public:
+	void FullScreenModeOn();
+	void FullScreenModeOff();
+	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 };
 
 

@@ -33,6 +33,7 @@
 
 #include <queue>
 #include <string>
+#include <deque>
 #include <afx.h>
 #include <afxcontrolbars.h>
 #include <dshow.h>
