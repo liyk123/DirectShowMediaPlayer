@@ -21,6 +21,7 @@ CMediaFile::CMediaFile():CObject()
 	height = 0;
 	isPlaying = false;
 	isPaused = false;
+	m_volume = 0;
 }
 
 BOOL CMediaFile::Init(HWND hwndApp)
@@ -52,6 +53,8 @@ BOOL CMediaFile::Releases()
 		pControl->Stop();
 	if (pVmr)
 		pVmr->Release();
+	if (pAudio)
+		pAudio->Release();
 	if (ppWc)
 		ppWc->Release();
 	if (pSeeking)
@@ -148,7 +151,6 @@ void CMediaFile::Play(HWND hwndView)
 
 	auto g_pWc = ppWc;
 	hr = g_pWc->GetNativeVideoSize(&width, &height, NULL, NULL);
-
 	if (SUCCEEDED(hr)&&width+height)
 	{
 		RECT rcSrc, rcDest;
@@ -166,7 +168,6 @@ void CMediaFile::Play(HWND hwndView)
 		hr = g_pWc->SetVideoPosition(&rcSrc, &rcDest);
 		
 	}
-
 	HWND dlg_hwnd = NULL;
 	dlg_hwnd = hwndView;
 	pEvent->SetNotifyWindow((OAHWND)dlg_hwnd, WM_USER + 20, 0);

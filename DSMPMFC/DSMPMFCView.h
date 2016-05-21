@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "MediaFile.h"
 
 class CDSMPMFCView : public CView
 {
@@ -59,6 +59,10 @@ public:
 	afx_msg void OnUpdateBtnNext(CCmdUI *pCmdUI);
 	afx_msg void OnBtnFs();
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	// 清屏
+	HRESULT ClearScreen();
+protected:
+	afx_msg LRESULT OnGraphnotify(WPARAM wParam, LPARAM lParam);
 };
 
 #ifndef _DEBUG  // DSMPMFCView.cpp 中的调试版本

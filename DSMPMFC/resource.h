@@ -14,6 +14,8 @@
 #define IDB_BITMAP_SHOW                 317
 #define IDC_EDIT_FILE_INFO              1000
 #define IDC_SLIDER_PRG                  1001
+#define IDC_SLIDER3                     1004
+#define IDC_SLIDER_VOL                  1004
 #define ID_BTN_PLAY                     32774
 #define ID_BTN_PAUSE                    32775
 #define ID_BTN_STOP                     32776
@@ -35,7 +37,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32795
-#define _APS_NEXT_CONTROL_VALUE         1002
+#define _APS_NEXT_CONTROL_VALUE         1005
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

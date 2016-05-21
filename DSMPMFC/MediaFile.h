@@ -4,6 +4,15 @@
 // CMediaFile ÃüÁîÄ¿±ê
 //#include <vmr9.h>
 //#include <d3d9.h>
+
+#define WM_GRAPHNOTIFY  (WM_USER+20)
+
+typedef enum _playlistmode
+{
+	sequence,
+	loop
+}Playlistmode;
+
 class CMediaFile : public CObject
 {
 public:
@@ -16,6 +25,7 @@ public:
 	IMediaEventEx *pEvent;
 	IBasicAudio *pAudio;
 	IBaseFilter *pVmr;
+	long m_volume;
 	long width;
 	long height;
 	bool isPlaying;

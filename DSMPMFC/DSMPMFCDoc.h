@@ -4,9 +4,7 @@
 
 
 #pragma once
-#include "AudioFile.h"
-#include "PictureFile.h"
-#include "VideoFile.h"
+#include "MediaFile.h"
 #include <deque>
 class CDSMPMFCDoc : public CDocument
 {
@@ -56,11 +54,11 @@ public:
 	// 播放列表
 	std::deque<CString> m_playlist;
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
-	// 分析播放列表文件
-//	HRESULT AnalizePlaylist(LPCTSTR lpszPathName);
-//	afx_msg void OnFileOpen();
 	bool m_isPlaylist;
+	Playlistmode m_playlistmode;
 	CMediaFile *m_pmf;
-	CBitmap m_backgraph;
+//	CBitmap m_backgraph;
 	UINT32 m_selector;
+	static int *volumes;
+	bool HasNextOrPri(bool flag);
 };

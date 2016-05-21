@@ -11,6 +11,7 @@ public:
 	CDlgbar(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CDlgbar();
 	CNiceSliderCtrl m_sctl;
+	CNiceSliderCtrl m_vctl;
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_DIALOGBAR_CTL };

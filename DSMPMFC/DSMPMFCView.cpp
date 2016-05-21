@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CDSMPMFCView, CView)
     ON_UPDATE_COMMAND_UI(ID_BTN_NEXT, &CDSMPMFCView::OnUpdateBtnNext)
     ON_COMMAND(ID_BTN_FS, &CDSMPMFCView::OnBtnFs)
     ON_WM_KEYDOWN()
+    ON_MESSAGE(WM_GRAPHNOTIFY, &CDSMPMFCView::OnGraphnotify)
 END_MESSAGE_MAP()
 
 // CDSMPMFCView 构造/析构
@@ -77,7 +78,6 @@ void CDSMPMFCView::OnDraw(CDC* pDC)
         return;
 
     // TODO: 在此处为本机数据添加绘制代码
-
 }
 
 
@@ -139,11 +139,6 @@ void CDSMPMFCView::OnUpdateBtnPlay(CCmdUI *pCmdUI)
         pCmdUI->Enable(TRUE);
 }
 
-
-//void CDSMPMFCView::OnBtnPause()
-//{
-//  // TODO: 在此添加命令处理程序代码
-//}
 
 
 void CDSMPMFCView::OnUpdateBtnStop(CCmdUI *pCmdUI)
@@ -211,9 +206,9 @@ void CDSMPMFCView::OnBtnPlay()
     // TODO: 在此添加命令处理程序代码
     if(!GetDocument()->m_pmf->isPlaying)
     {
-		CString name_t = GetDocument()->m_playlist.at(GetDocument()->m_selector);
+        CString name_t = GetDocument()->m_playlist.at(GetDocument()->m_selector);
         GetDocument()->m_pmf->name = name_t;
-		GetParent()->SetWindowTextW(name_t);
+        GetParent()->SetWindowTextW(name_t);
     }
 
     GetDocument()->m_pmf->Play(GetSafeHwnd());
@@ -226,6 +221,9 @@ void CDSMPMFCView::OnBtnStop()
     // TODO: 在此添加命令处理程序代码
     KillTimer(1);
     m_pctrl->SetPos(0);
+	CMainFrame* pFrame = (CMainFrame*)GetParent();
+	CStatusBar* pSbar = pFrame->MainFrameGetStBar();
+	pSbar->SetPaneText(0, L"00:00:00/00:00:00");
     GetDocument()->m_pmf->Stop();
 }
 
@@ -324,11 +322,7 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
             TRACE("%d\n", m_pctrl->GetPos());
         }
 		
-
         pSbar->SetPaneText(0, curtimestr + L"/" + durationstr);
-		if (curtime == duration)
-			OnBtnStop();
-		
     }
 
     CView::OnTimer(nIDEvent);
@@ -345,12 +339,9 @@ void CDSMPMFCView::OnInitialUpdate()
 
 void CDSMPMFCView::OnBtnNext()
 {
-    // TODO: 在此添加命令处理程序代码
-    if(GetDocument()->m_isPlaylist && GetDocument()->m_playlist.size() > 1)
-    {
-        if(GetDocument()->m_selector + 1 < GetDocument()->m_playlist.size())
-            GetDocument()->m_selector++;
-    }
+	
+    if(GetDocument()->m_selector + 1 < GetDocument()->m_playlist.size())
+        GetDocument()->m_selector++;
 
     if(GetDocument()->m_pmf->isPlaying)
         OnBtnStop();
@@ -361,12 +352,9 @@ void CDSMPMFCView::OnBtnNext()
 
 void CDSMPMFCView::OnBtnBack()
 {
-    // TODO: 在此添加命令处理程序代码
-    if(GetDocument()->m_isPlaylist && GetDocument()->m_playlist.size() > 1)
-    {
-        if(GetDocument()->m_selector > 0)
-            GetDocument()->m_selector--;
-    }
+	
+    if(GetDocument()->m_selector > 0)
+        GetDocument()->m_selector--;
 
     if(GetDocument()->m_pmf->isPlaying)
         OnBtnStop();
@@ -381,19 +369,22 @@ void CDSMPMFCView::OnUpdateBtnBack(CCmdUI *pCmdUI)
     if(GetDocument()->m_playlist.size() < 2)
         pCmdUI->Enable(FALSE);
     else
-        pCmdUI->Enable(TRUE);
+    {
+		pCmdUI->Enable(GetDocument()->HasNextOrPri(false));
+	
+	}
 }
 
-
-void CDSMPMFCView::OnUpdateBtnNext(CCmdUI *pCmdUI)
+void CDSMPMFCView::OnUpdateBtnNext(CCmdUI * pCmdUI)
 {
     // TODO: 在此添加命令更新用户界面处理程序代码
     if(GetDocument()->m_playlist.size() < 2)
         pCmdUI->Enable(FALSE);
     else
-        pCmdUI->Enable(TRUE);
+    {
+		pCmdUI->Enable(GetDocument()->HasNextOrPri(true));
+    }
 }
-
 
 void CDSMPMFCView::OnBtnFs()
 {
@@ -405,7 +396,6 @@ void CDSMPMFCView::OnBtnFs()
     else
         pFrame->FullScreenModeOff();
 }
-
 
 void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
@@ -421,26 +411,31 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
         case VK_F9:
             {
-				OnFileInfo();
+                OnFileInfo();
                 break;
             }
-		case VK_SPACE:
-			{
-				if (!GetDocument()->m_playlist.empty())
-				{
-					if (GetDocument()->m_pmf->isPlaying && !GetDocument()->m_pmf->isPaused)
-						OnBtnPause();
-					else
-						OnBtnPlay();
-				}
-				break;
-			}
-		case 'S':
-		{
-			if (GetDocument()->m_pmf->isPlaying)
-				OnBtnStop();
-			break;
-		}
+
+        case VK_SPACE:
+            {
+                if(!GetDocument()->m_playlist.empty())
+                {
+                    if(GetDocument()->m_pmf->isPlaying && !GetDocument()->m_pmf->isPaused)
+                        OnBtnPause();
+                    else
+                        OnBtnPlay();
+                }
+
+                break;
+            }
+
+        case 'S':
+            {
+                if(GetDocument()->m_pmf->isPlaying)
+                    OnBtnStop();
+
+                break;
+            }
+
         case VK_RIGHT:
             {
                 int nPos = m_pctrl->GetPos() + 50;
@@ -465,9 +460,69 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
                 break;
             }
 
+        case VK_PRIOR:
+            {
+				if(GetDocument()->HasNextOrPri(false))
+					OnBtnBack();
+                break;
+            }
+
+        case VK_NEXT:
+            {
+				if(GetDocument()->HasNextOrPri(true))
+					OnBtnNext();
+                break;
+            }
+
         default:
             break;
     }
 
     CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+// 清屏
+HRESULT CDSMPMFCView::ClearScreen()
+{
+
+    return S_OK;
+}
+
+
+afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
+{
+    LONG   eventCode = 0, eventParam1 = 0, eventParam2 = 0;
+
+    while(SUCCEEDED(GetDocument()->m_pmf->pEvent->GetEvent(&eventCode, &eventParam1, &eventParam2, 0)))
+    {
+        // Spin through the events
+		long long duration;
+        GetDocument()->m_pmf->pEvent->FreeEventParams(eventCode, eventParam1, eventParam2);
+		GetDocument()->m_pmf->pSeeking->GetDuration(&duration);
+		if (duration==0)
+			continue;
+		switch (eventCode)
+		{
+		case EC_COMPLETE:
+		{
+			if (GetDocument()->HasNextOrPri(true))
+				OnBtnNext();
+			else
+				OnBtnStop();
+			break;
+		}
+
+		case EC_USERABORT:
+		case EC_ERRORABORT:
+		{
+			OnBtnStop();
+			break;
+		}
+
+		default:
+			break;
+		}
+    }
+
+    return 0;
 }

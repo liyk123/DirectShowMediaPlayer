@@ -113,8 +113,8 @@ BEGIN
     BUTTON      ID_BTN_PLAY
     BUTTON      ID_BTN_PAUSE
     BUTTON      ID_BTN_STOP
-    BUTTON      ID_BTN_NEXT
     BUTTON      ID_BTN_BACK
+    BUTTON      ID_BTN_NEXT
 END
 
 
@@ -142,12 +142,12 @@ BEGIN
     END
     POPUP "控制(&C)"
     BEGIN
-        MENUITEM "播放(&A)",                      ID_BTN_PLAY
-        MENUITEM "暂停(&P)",                      ID_BTN_PAUSE
-        MENUITEM "停止(&S)",                      ID_BTN_STOP
+        MENUITEM "播放(&A)\tSpace",               ID_BTN_PLAY
+        MENUITEM "暂停(&P)\tSpace",               ID_BTN_PAUSE
+        MENUITEM "停止(&S)\tS",                   ID_BTN_STOP
         MENUITEM SEPARATOR
-        MENUITEM "下一个(&N)",                     ID_BTN_NEXT
-        MENUITEM "上一个(&B)",                     ID_BTN_BACK
+        MENUITEM "下一个(&N)\t PageDown",          ID_BTN_NEXT
+        MENUITEM "上一个(&B)\tPageUp",             ID_BTN_BACK
     END
     POPUP "查看(&V)"
     BEGIN
@@ -155,7 +155,7 @@ BEGIN
         MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
         MENUITEM "文件信息(&I)\tF9",                ID_FILE_INFO
-        MENUITEM "全屏(&F)",                      ID_BTN_FS
+        MENUITEM "全屏(&F)\tF11",                 ID_BTN_FS
     END
     POPUP "帮助(&H)"
     BEGIN
@@ -212,11 +212,12 @@ BEGIN
     EDITTEXT        IDC_EDIT_FILE_INFO,7,7,295,162,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_DIALOGBAR_CTL DIALOGEX 0, 0, 330, 22
+IDD_DIALOGBAR_CTL DIALOGEX 0, 0, 428, 22
 STYLE DS_SETFONT | WS_CHILD
 FONT 9, "宋体", 400, 0, 0x0
 BEGIN
-    CONTROL         "",IDC_SLIDER_PRG,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,0,0,329,21,WS_EX_CLIENTEDGE
+    CONTROL         "",IDC_SLIDER_PRG,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,0,1,363,19,WS_EX_CLIENTEDGE
+    CONTROL         "",IDC_SLIDER_VOL,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,364,1,63,19,WS_EX_CLIENTEDGE
 END
 
 
@@ -285,6 +286,8 @@ BEGIN
 
     IDD_DIALOGBAR_CTL, DIALOG
     BEGIN
+        RIGHTMARGIN, 427
+        BOTTOMMARGIN, 19
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -303,7 +306,8 @@ END
 IDD_DIALOGBAR_CTL AFX_DIALOG_LAYOUT
 BEGIN
     0,
-    0, 0, 100, 0
+    0, 0, 100, 0,
+    100, 0, 0, 0
 END
 
 
