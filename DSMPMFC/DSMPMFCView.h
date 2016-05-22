@@ -4,7 +4,7 @@
 
 #pragma once
 #include "MediaFile.h"
-
+#include "NiceSlider.h"
 class CDSMPMFCView : public CView
 {
 protected: // 仅从序列化创建
@@ -14,7 +14,8 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	CDSMPMFCDoc* GetDocument() const;
-	CSliderCtrl* m_pctrl;
+	CNiceSliderCtrl* m_pctrl;
+	CNiceSliderCtrl* m_vctrl;
 // 操作
 public:
 

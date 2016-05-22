@@ -220,6 +220,13 @@ BEGIN
     CONTROL         "",IDC_SLIDER_VOL,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,364,1,63,19,WS_EX_CLIENTEDGE
 END
 
+IDD_FORMVIEW DIALOGEX 0, 0, 185, 93
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 400, 0, 0x0
+BEGIN
+    LTEXT           "TODO: 布局窗体视图",IDC_STATIC,55,42,74,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -289,6 +296,10 @@ BEGIN
         RIGHTMARGIN, 427
         BOTTOMMARGIN, 19
     END
+
+    IDD_FORMVIEW, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -308,6 +319,11 @@ BEGIN
     0,
     0, 0, 100, 0,
     100, 0, 0, 0
+END
+
+IDD_FORMVIEW AFX_DIALOG_LAYOUT
+BEGIN
+    0
 END
 
 

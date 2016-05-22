@@ -220,11 +220,11 @@ void CDSMPMFCView::OnBtnStop()
     // TODO: 在此添加命令处理程序代码
     KillTimer(1);
     m_pctrl->SetPos(0);
-	CMainFrame* pFrame = (CMainFrame*)GetParent();
-	CStatusBar* pSbar = pFrame->MainFrameGetStBar();
-	pSbar->SetPaneText(0, L"00:00:00/00:00:00");
+    CMainFrame* pFrame = (CMainFrame*)GetParent();
+    CStatusBar* pSbar = pFrame->MainFrameGetStBar();
+    pSbar->SetPaneText(1, L"00:00:00/00:00:00");
     GetDocument()->m_pmf->Stop();
-	ClearScreen();
+    ClearScreen();
 }
 
 
@@ -321,9 +321,10 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
             m_pctrl->SetPos(progress);
             TRACE("%d\n", m_pctrl->GetPos());
         }
-		CString text;
-		text.Format(L"正在播放:%s", GetDocument()->m_pmf->name.c_str());
-		pSbar->SetPaneText(0, text);
+
+        CString text;
+        text.Format(L"正在播放:%s", GetDocument()->m_pmf->name.c_str());
+        pSbar->SetPaneText(0, text);
         pSbar->SetPaneText(1, curtimestr + L"/" + durationstr);
     }
 
@@ -335,13 +336,13 @@ void CDSMPMFCView::OnInitialUpdate()
 {
     CView::OnInitialUpdate();
     // TODO: 在此添加专用代码和/或调用基类
-    m_pctrl = (CSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_PRG));
+    m_pctrl = (CNiceSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_PRG));
+    m_vctrl = (CNiceSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_VOL));
 }
 
 
 void CDSMPMFCView::OnBtnNext()
 {
-	
     if(GetDocument()->m_selector + 1 < GetDocument()->m_playlist.size())
         GetDocument()->m_selector++;
 
@@ -354,7 +355,6 @@ void CDSMPMFCView::OnBtnNext()
 
 void CDSMPMFCView::OnBtnBack()
 {
-	
     if(GetDocument()->m_selector > 0)
         GetDocument()->m_selector--;
 
@@ -372,9 +372,8 @@ void CDSMPMFCView::OnUpdateBtnBack(CCmdUI *pCmdUI)
         pCmdUI->Enable(FALSE);
     else
     {
-		pCmdUI->Enable(GetDocument()->HasNextOrPri(false));
-	
-	}
+        pCmdUI->Enable(GetDocument()->HasNextOrPri(false));
+    }
 }
 
 void CDSMPMFCView::OnUpdateBtnNext(CCmdUI * pCmdUI)
@@ -384,7 +383,7 @@ void CDSMPMFCView::OnUpdateBtnNext(CCmdUI * pCmdUI)
         pCmdUI->Enable(FALSE);
     else
     {
-		pCmdUI->Enable(GetDocument()->HasNextOrPri(true));
+        pCmdUI->Enable(GetDocument()->HasNextOrPri(true));
     }
 }
 
@@ -464,15 +463,49 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
         case VK_PRIOR:
             {
-				if(GetDocument()->HasNextOrPri(false))
-					OnBtnBack();
+                if(GetDocument()->HasNextOrPri(false))
+                    OnBtnBack();
+
                 break;
             }
 
         case VK_NEXT:
             {
-				if(GetDocument()->HasNextOrPri(true))
-					OnBtnNext();
+                if(GetDocument()->HasNextOrPri(true))
+                    OnBtnNext();
+
+                break;
+            }
+
+        case VK_UP:
+            {
+                int nPos = m_vctrl->GetPos() + 2;
+
+                if(nPos > 100)
+                    nPos = 100;
+
+                m_vctrl->SetPos(nPos);
+				GetDocument()->m_pmf->m_volume = CDSMPMFCDoc::volumes[nPos];
+				if (GetDocument()->m_pmf->isPlaying)
+				{
+					GetDocument()->m_pmf->pAudio->put_Volume(GetDocument()->m_pmf->m_volume);
+				}
+
+                break;
+            }
+
+        case VK_DOWN:
+            {
+                int nPos = m_vctrl->GetPos() - 2;
+
+                if(nPos < 0)
+                    nPos = 0;
+
+                m_vctrl->SetPos(nPos);
+				GetDocument()->m_pmf->m_volume = CDSMPMFCDoc::volumes[nPos];
+                if(GetDocument()->m_pmf->isPlaying)
+                    GetDocument()->m_pmf->pAudio->put_Volume(GetDocument()->m_pmf->m_volume);
+
                 break;
             }
 
@@ -486,32 +519,30 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 // 清屏
 HRESULT CDSMPMFCView::ClearScreen()
 {
-	//CPaintDC dc(this); // device context for painting
-					   // TODO: 在此处添加消息处理程序代码
-	/*PAINTSTRUCT ps;
-	RECT        rc2;
-	HWND hwnd = GetSafeHwnd();
-	GetClientRect(&rc2);
-	::BeginPaint(hwnd, &ps);
-	FillRect(dc, &rc2, (HBRUSH)GetStockObject(BLACK_BRUSH));
+    //CPaintDC dc(this); // device context for painting
+    // TODO: 在此处添加消息处理程序代码
+    /*PAINTSTRUCT ps;
+    RECT        rc2;
+    HWND hwnd = GetSafeHwnd();
+    GetClientRect(&rc2);
+    ::BeginPaint(hwnd, &ps);
+    FillRect(dc, &rc2, (HBRUSH)GetStockObject(BLACK_BRUSH));
     ::EndPaint(hwnd, &ps);*/
-	//CRect   rect;
-	//GetClientRect(&rect);
-	//CDC   dcMem;
-	//dcMem.CreateCompatibleDC(&dc);
-	//CBitmap   bmpBackground;
-	//bmpBackground.LoadBitmap(IDB_BITMAP_BACK);
-	////IDB_BITMAP是你自己的图对应的ID   
-	//BITMAP   bitmap;
-	//bmpBackground.GetBitmap(&bitmap);
-	//CBitmap   *pbmpOld = dcMem.SelectObject(&bmpBackground);
-	//dc.StretchBlt(0, 0, rect.Width(), rect.Height(), &dcMem, 0, 0,
-	//	bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
-	Invalidate(TRUE);
+    //CRect   rect;
+    //GetClientRect(&rect);
+    //CDC   dcMem;
+    //dcMem.CreateCompatibleDC(&dc);
+    //CBitmap   bmpBackground;
+    //bmpBackground.LoadBitmap(IDB_BITMAP_BACK);
+    ////IDB_BITMAP是你自己的图对应的ID
+    //BITMAP   bitmap;
+    //bmpBackground.GetBitmap(&bitmap);
+    //CBitmap   *pbmpOld = dcMem.SelectObject(&bmpBackground);
+    //dc.StretchBlt(0, 0, rect.Width(), rect.Height(), &dcMem, 0, 0,
+    //  bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+    Invalidate(TRUE);
     return S_OK;
 }
-
-
 afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
 {
     LONG   eventCode = 0, eventParam1 = 0, eventParam2 = 0;
@@ -519,32 +550,35 @@ afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
     while(SUCCEEDED(GetDocument()->m_pmf->pEvent->GetEvent(&eventCode, &eventParam1, &eventParam2, 0)))
     {
         // Spin through the events
-		long long duration;
+        long long duration;
         GetDocument()->m_pmf->pEvent->FreeEventParams(eventCode, eventParam1, eventParam2);
-		GetDocument()->m_pmf->pSeeking->GetDuration(&duration);
-		if (duration==0)
-			continue;
-		switch (eventCode)
-		{
-		case EC_COMPLETE:
-		{
-			if (GetDocument()->HasNextOrPri(true))
-				OnBtnNext();
-			else
-				OnBtnStop();
-			break;
-		}
+        GetDocument()->m_pmf->pSeeking->GetDuration(&duration);
 
-		case EC_USERABORT:
-		case EC_ERRORABORT:
-		{
-			OnBtnStop();
-			break;
-		}
+        if(duration == 0)
+            continue;
 
-		default:
-			break;
-		}
+        switch(eventCode)
+        {
+            case EC_COMPLETE:
+                {
+                    if(GetDocument()->HasNextOrPri(true))
+                        OnBtnNext();
+                    else
+                        OnBtnStop();
+
+                    break;
+                }
+
+            case EC_USERABORT:
+            case EC_ERRORABORT:
+                {
+                    OnBtnStop();
+                    break;
+                }
+
+            default:
+                break;
+        }
     }
 
     return 0;

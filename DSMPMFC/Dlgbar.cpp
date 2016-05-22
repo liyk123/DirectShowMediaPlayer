@@ -74,6 +74,7 @@ void CDlgbar::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	}
 	else if (pScrollBar->GetSafeHwnd() == m_vctl.GetSafeHwnd())
 	{
+		pDoc->m_pmf->m_volume = CDSMPMFCDoc::volumes[nPos];
 		if (pDoc->m_pmf->isPlaying/*&&nSBCode == SB_THUMBPOSITION*/)
 			pDoc->m_pmf->pAudio->put_Volume(CDSMPMFCDoc::volumes[m_vctl.GetPos()]);
 		CString text;

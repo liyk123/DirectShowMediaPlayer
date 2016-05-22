@@ -172,6 +172,7 @@ void CMediaFile::Play(HWND hwndView)
 	dlg_hwnd = hwndView;
 	pEvent->SetNotifyWindow((OAHWND)dlg_hwnd, WM_USER + 20, 0);
 	// Run
+	pAudio->put_Volume(m_volume);
 	hr = pControl->Run();
 	isPlaying = true;
 }
