@@ -76,6 +76,9 @@ void CDlgbar::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	{
 		if (pDoc->m_pmf->isPlaying/*&&nSBCode == SB_THUMBPOSITION*/)
 			pDoc->m_pmf->pAudio->put_Volume(CDSMPMFCDoc::volumes[m_vctl.GetPos()]);
+		CString text;
+		text.Format(L"%d%%", m_vctl.GetPos());
+		pFrame->MainFrameGetStBar()->SetPaneText(2,text);
 	}
 	CDialogBar::OnHScroll(nSBCode, nPos, pScrollBar);
 }

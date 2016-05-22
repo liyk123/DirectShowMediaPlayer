@@ -4,6 +4,8 @@
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
+#define ID_INDICATOR_PTIME              101
+#define ID_INDICATOR_VOL                102
 #define IDD_DIALOGBAR_CTL               103
 #define IDR_MAINFRAME                   128
 #define IDR_DSMPMFCTYPE                 130
@@ -14,7 +16,6 @@
 #define IDB_BITMAP_SHOW                 317
 #define IDC_EDIT_FILE_INFO              1000
 #define IDC_SLIDER_PRG                  1001
-#define IDC_SLIDER3                     1004
 #define IDC_SLIDER_VOL                  1004
 #define ID_BTN_PLAY                     32774
 #define ID_BTN_PAUSE                    32775

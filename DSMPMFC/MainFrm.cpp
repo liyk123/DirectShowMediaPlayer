@@ -25,8 +25,10 @@ END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-    ID_SEPARATOR,           // 状态行指示器
-    ID_INDICATOR_CAPS,
+	ID_SEPARATOR,           // 状态行指示器
+	ID_INDICATOR_PTIME,
+	ID_INDICATOR_VOL,
+	ID_INDICATOR_CAPS,
     ID_INDICATOR_NUM,
     ID_INDICATOR_SCRL,
 };

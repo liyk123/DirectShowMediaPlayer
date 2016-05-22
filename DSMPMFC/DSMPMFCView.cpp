@@ -208,7 +208,6 @@ void CDSMPMFCView::OnBtnPlay()
     {
         CString name_t = GetDocument()->m_playlist.at(GetDocument()->m_selector);
         GetDocument()->m_pmf->name = name_t;
-        GetParent()->SetWindowTextW(name_t);
     }
 
     GetDocument()->m_pmf->Play(GetSafeHwnd());
@@ -225,6 +224,7 @@ void CDSMPMFCView::OnBtnStop()
 	CStatusBar* pSbar = pFrame->MainFrameGetStBar();
 	pSbar->SetPaneText(0, L"00:00:00/00:00:00");
     GetDocument()->m_pmf->Stop();
+	ClearScreen();
 }
 
 
@@ -250,7 +250,7 @@ void CDSMPMFCView::OnPaint()
         HRGN rgnVideo = CreateRectRgnIndirect(&g_rcDest);
         CombineRgn(rgnClient, rgnClient, rgnVideo, RGN_DIFF);
         // 重绘窗体
-        HBRUSH hbr = GetSysColorBrush(COLOR_DESKTOP);
+        HBRUSH hbr = (HBRUSH)GetStockObject(BLACK_BRUSH);
         FillRgn(dc, rgnClient, hbr);
         // 释放对象
         DeleteObject(hbr);
@@ -266,7 +266,7 @@ void CDSMPMFCView::OnPaint()
     }
     else  // 没有视频显示，重绘整个客户区
     {
-        FillRect(dc, &rc2, (HBRUSH)(COLOR_DESKTOP));
+        FillRect(dc, &rc2, (HBRUSH)GetStockObject(BLACK_BRUSH));
     }
 
     ::EndPaint(hwnd, &ps);
@@ -321,8 +321,10 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
             m_pctrl->SetPos(progress);
             TRACE("%d\n", m_pctrl->GetPos());
         }
-		
-        pSbar->SetPaneText(0, curtimestr + L"/" + durationstr);
+		CString text;
+		text.Format(L"正在播放:%s", GetDocument()->m_pmf->name.c_str());
+		pSbar->SetPaneText(0, text);
+        pSbar->SetPaneText(1, curtimestr + L"/" + durationstr);
     }
 
     CView::OnTimer(nIDEvent);
@@ -484,7 +486,28 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 // 清屏
 HRESULT CDSMPMFCView::ClearScreen()
 {
-
+	//CPaintDC dc(this); // device context for painting
+					   // TODO: 在此处添加消息处理程序代码
+	/*PAINTSTRUCT ps;
+	RECT        rc2;
+	HWND hwnd = GetSafeHwnd();
+	GetClientRect(&rc2);
+	::BeginPaint(hwnd, &ps);
+	FillRect(dc, &rc2, (HBRUSH)GetStockObject(BLACK_BRUSH));
+    ::EndPaint(hwnd, &ps);*/
+	//CRect   rect;
+	//GetClientRect(&rect);
+	//CDC   dcMem;
+	//dcMem.CreateCompatibleDC(&dc);
+	//CBitmap   bmpBackground;
+	//bmpBackground.LoadBitmap(IDB_BITMAP_BACK);
+	////IDB_BITMAP是你自己的图对应的ID   
+	//BITMAP   bitmap;
+	//bmpBackground.GetBitmap(&bitmap);
+	//CBitmap   *pbmpOld = dcMem.SelectObject(&bmpBackground);
+	//dc.StretchBlt(0, 0, rect.Width(), rect.Height(), &dcMem, 0, 0,
+	//	bitmap.bmWidth, bitmap.bmHeight, SRCCOPY);
+	Invalidate(TRUE);
     return S_OK;
 }
 
