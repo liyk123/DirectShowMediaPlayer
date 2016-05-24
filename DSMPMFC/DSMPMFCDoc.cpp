@@ -52,14 +52,20 @@ CDSMPMFCDoc::CDSMPMFCDoc()
 	AfxOleLockApp();
 	m_pmf = new CMediaFile;
 //	m_backgraph.LoadBitmapW(IDB_BITMAP_BACK);
-	m_selector = 0;
+	m_plist_selector = 0;
 	m_playlistmode = Playlistmode::sequence;
+	m_playlist.clear();
+	m_lrc_selector.clear();
+	m_isSingleloop = false;
 }
 
 CDSMPMFCDoc::~CDSMPMFCDoc()
 {
     AfxOleUnlockApp();
 	delete m_pmf;
+	m_playlist.clear();
+	m_lrc_selector.clear();
+	
 }
 
 BOOL CDSMPMFCDoc::OnNewDocument()
@@ -91,27 +97,26 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
     if(ar.IsStoring())
     {
         // TODO: 在此添加存储代码
-		if (m_isPlaylist)
-		{
+		//if (m_isPlaylist)
+		//{
 			while (!this->m_playlist.empty())
 			{
 				//ar << m_playlist.front() << "\n";
-				ar.WriteString(L"\""+m_playlist.front());
-				ar << "\r";
+				tmpstr.Format(L"\"%s\n", m_playlist.front());
+				ar.WriteString(tmpstr);
 				m_playlist.pop_front();
-				
 			}
-		}
-		else
-		{
-			ar.Close();
-		}
-		
+		//}
+		//else
+		//{
+		//	ar.Close();
+		//}
+		//
     }
     else
     {
         // TODO: 在此添加加载代码
-		m_selector = 0;
+		m_plist_selector = 0;
 		CString str = L"";
 		if (m_isPlaylist)
 		{
@@ -119,6 +124,9 @@ void CDSMPMFCDoc::Serialize(CArchive& ar)
 			{
 				TRACE(str+L"\n");
 				str=str.Mid(str.Find(L"\"",0)+1);
+				if (str=="")
+					continue;
+
 				m_playlist.push_back(str);
 			}
 			
@@ -226,7 +234,7 @@ bool CDSMPMFCDoc::HasNextOrPri(bool flag)
 		case Playlistmode::loop:
 			return true;
 		case Playlistmode::sequence:
-			return flag ? (m_selector + 1) != m_playlist.size() : m_selector > 0;
+			return flag ? (m_plist_selector + 1) != m_playlist.size() : m_plist_selector > 0;
 		default:
 			return false;
 		}

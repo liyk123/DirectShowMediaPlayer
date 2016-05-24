@@ -5,6 +5,9 @@
 #pragma once
 #include "MediaFile.h"
 #include "NiceSlider.h"
+#include "DlgPlaylist.h"
+#include "DlgLrc.h"
+
 class CDSMPMFCView : public CView
 {
 protected: // 仅从序列化创建
@@ -16,6 +19,8 @@ public:
 	CDSMPMFCDoc* GetDocument() const;
 	CNiceSliderCtrl* m_pctrl;
 	CNiceSliderCtrl* m_vctrl;
+	CDlgPlaylist* m_dlgplaylist;
+	CDlgLrc* m_dlglrc;
 // 操作
 public:
 
@@ -64,6 +69,19 @@ public:
 	HRESULT ClearScreen();
 protected:
 	afx_msg LRESULT OnGraphnotify(WPARAM wParam, LPARAM lParam);
+public:
+	afx_msg void OnPlaylist();
+	afx_msg void OnUpdateFileSave(CCmdUI *pCmdUI);
+	afx_msg void OnModSeq();
+	afx_msg void OnModLoop();
+	afx_msg void OnUpdateModSeq(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateModLoop(CCmdUI *pCmdUI);
+	afx_msg void OnLrc();
+	void RstrToUnicode(CString & str, UINT CodePage);
+	void UpdateLrcIndex();
+	afx_msg void OnUpdatePlaylist(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLrc(CCmdUI *pCmdUI);
+	afx_msg void OnModSloop();
 };
 
 #ifndef _DEBUG  // DSMPMFCView.cpp 中的调试版本

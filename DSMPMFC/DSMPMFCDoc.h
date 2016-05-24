@@ -6,6 +6,9 @@
 #pragma once
 #include "MediaFile.h"
 #include <deque>
+#include <map>
+#include <string>
+
 class CDSMPMFCDoc : public CDocument
 {
 protected: // 仅从序列化创建
@@ -58,7 +61,9 @@ public:
 	Playlistmode m_playlistmode;
 	CMediaFile *m_pmf;
 //	CBitmap m_backgraph;
-	UINT32 m_selector;
+	UINT32 m_plist_selector;
 	static int *volumes;
+	std::map<std::wstring, int> m_lrc_selector;
 	bool HasNextOrPri(bool flag);
+	bool m_isSingleloop;
 };

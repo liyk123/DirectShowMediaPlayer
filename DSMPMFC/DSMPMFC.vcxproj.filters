@@ -113,6 +113,12 @@
     <ClInclude Include="NiceSlider.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DlgPlaylist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLrc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DSMPMFC.cpp">
@@ -152,6 +158,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="NiceSlider.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPlaylist.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLrc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

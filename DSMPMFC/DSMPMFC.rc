@@ -148,6 +148,11 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "下一个(&N)\t PageDown",          ID_BTN_NEXT
         MENUITEM "上一个(&B)\tPageUp",             ID_BTN_BACK
+        MENUITEM SEPARATOR
+        MENUITEM "循环播放(&L)",                    ID_MOD_LOOP
+        MENUITEM "顺序播放(&Q)",                    ID_MOD_SEQ
+        MENUITEM SEPARATOR
+        MENUITEM "单项循环(&I)",                    ID_MOD_SLOOP
     END
     POPUP "查看(&V)"
     BEGIN
@@ -156,6 +161,8 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "文件信息(&I)\tF9",                ID_FILE_INFO
         MENUITEM "全屏(&F)\tF11",                 ID_BTN_FS
+        MENUITEM "播放列表(&L)\tF6",                ID_PLAYLIST
+        MENUITEM "歌词面板(&R)",                    ID_LRC
     END
     POPUP "帮助(&H)"
     BEGIN
@@ -198,9 +205,9 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "关于 DSMPMFC"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
     LTEXT           "DSMPMFC，1.0 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2016",IDC_STATIC,42,26,114,8
+    LTEXT           "Copyright (C)liyk 2016",IDC_STATIC,42,26,114,8
     DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
 END
 
@@ -220,11 +227,20 @@ BEGIN
     CONTROL         "",IDC_SLIDER_VOL,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,364,1,63,19,WS_EX_CLIENTEDGE
 END
 
-IDD_FORMVIEW DIALOGEX 0, 0, 185, 93
-STYLE DS_SETFONT | WS_CHILD
-FONT 9, "宋体", 400, 0, 0x0
+IDD_DLG_PLIST DIALOGEX 0, 0, 169, 232
+STYLE DS_SYSMODAL | DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "播放列表"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "TODO: 布局窗体视图",IDC_STATIC,55,42,74,8
+    LISTBOX         IDC_PLAYLIST,7,7,155,218,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+END
+
+IDD_DLG_LRC DIALOGEX 0, 0, 325, 192
+STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "歌词面板"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LISTBOX         IDC_LIST_LRC,7,7,311,178,LBS_NOINTEGRALHEIGHT | LBS_WANTKEYBOARDINPUT | WS_VSCROLL | WS_TABSTOP
 END
 
 
@@ -297,8 +313,20 @@ BEGIN
         BOTTOMMARGIN, 19
     END
 
-    IDD_FORMVIEW, DIALOG
+    IDD_DLG_PLIST, DIALOG
     BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 162
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 225
+    END
+
+    IDD_DLG_LRC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 318
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 185
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -321,7 +349,19 @@ BEGIN
     100, 0, 0, 0
 END
 
-IDD_FORMVIEW AFX_DIALOG_LAYOUT
+IDD_DLG_PLIST AFX_DIALOG_LAYOUT
+BEGIN
+    0,
+    0, 0, 100, 100
+END
+
+IDD_DLG_LRC AFX_DIALOG_LAYOUT
+BEGIN
+    0,
+    0, 0, 100, 100
+END
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -467,6 +507,14 @@ BEGIN
     ID_BTN_NEXT             "下一个"
     ID_BTN_BACK             "上一个"
     ID_BTN_FS               "全屏显示"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MOD_SEQ              "进入顺序播放状态"
+    ID_MOD_LOOP             "进入循环播放状态"
+    ID_LRC                  "显示歌词面板"
+    ID_MOD_SLOOP            "单项循环"
 END
 
 #endif    // 中文(简体，中国) resources

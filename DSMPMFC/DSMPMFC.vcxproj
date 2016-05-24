@@ -209,6 +209,8 @@ Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
     <ClInclude Include="AudioFile.h" />
     <ClInclude Include="Dlgbar.h" />
     <ClInclude Include="DlgFileInfo.h" />
+    <ClInclude Include="DlgLrc.h" />
+    <ClInclude Include="DlgPlaylist.h" />
     <ClInclude Include="DSMPMFC.h" />
     <ClInclude Include="DSMPMFCDoc.h" />
     <ClInclude Include="DSMPMFCView.h" />
@@ -240,6 +242,8 @@ Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
     <ClCompile Include="AudioFile.cpp" />
     <ClCompile Include="Dlgbar.cpp" />
     <ClCompile Include="DlgFileInfo.cpp" />
+    <ClCompile Include="DlgLrc.cpp" />
+    <ClCompile Include="DlgPlaylist.cpp" />
     <ClCompile Include="DSMPMFC.cpp" />
     <ClCompile Include="DSMPMFCDoc.cpp" />
     <ClCompile Include="DSMPMFCView.cpp" />

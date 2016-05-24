@@ -190,6 +190,7 @@ int CDSMPMFCApp::ExitInstance()
 	//TODO: 处理可能已添加的附加资源
 	AfxOleTerm(FALSE);
 	CoUninitialize();
+	delete CDSMPMFCDoc::volumes;
 	return CWinApp::ExitInstance();
 }
 
