@@ -82,6 +82,7 @@ public:
 	afx_msg void OnUpdatePlaylist(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLrc(CCmdUI *pCmdUI);
 	afx_msg void OnModSloop();
+	afx_msg void OnUpdateModSloop(CCmdUI *pCmdUI);
 };
 
 #ifndef _DEBUG  // DSMPMFCView.cpp 中的调试版本

@@ -161,7 +161,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "文件信息(&I)\tF9",                ID_FILE_INFO
         MENUITEM "全屏(&F)\tF11",                 ID_BTN_FS
-        MENUITEM "播放列表(&L)\tF6",                ID_PLAYLIST
+        MENUITEM "播放列表(&L)\tF8",                ID_PLAYLIST
         MENUITEM "歌词面板(&R)",                    ID_LRC
     END
     POPUP "帮助(&H)"

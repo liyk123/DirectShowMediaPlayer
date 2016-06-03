@@ -1,6 +1,5 @@
 #pragma once
 #include "MediaInfoDLL.h"
-
 // CMediaFile ÃüÁîÄ¿±ê
 //#include <vmr9.h>
 //#include <d3d9.h>

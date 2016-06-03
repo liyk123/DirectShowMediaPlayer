@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DSMPMFC.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAudioFile">
+    <Position X="4.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AudioFile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDlgbar" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAEAAAAACAAABACAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dlgbar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDlgFileInfo" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAgAIAAAJAAAA=</HashCode>
+      <FileName>DlgFileInfo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDlgLrc" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAQABAAAAAABAAACCAAAAAAAAAAAAAAAgAAAg=</HashCode>
+      <FileName>DlgLrc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDlgPlaylist" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAACAAAABAAAAAABAAACAAAQAAAAEAAAAAAAAAAAg=</HashCode>
+      <FileName>DlgPlaylist.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDSMPMFCApp" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAACAAAQAAAABAAAAQAA=</HashCode>
+      <FileName>DSMPMFC.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDSMPMFCDoc" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAwAAAAEAAAAACAAAgAAiCTggAAAEAAAAAAAEIgA=</HashCode>
+      <FileName>DSMPMFCDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDSMPMFCView" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACEAgAjAEhAAAAQOJRggEAgigJIEggAEQ5IUAAAQQA=</HashCode>
+      <FileName>DSMPMFCView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainFrame" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAASAAAAAIQAEAACAAAiAIAgCAAEgAAAAAEAAAAgBA=</HashCode>
+      <FileName>MainFrm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMediaFile">
+    <Position X="6.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABggAAAQAAAAwQASAAAAAADBAAEAAAEoUACAEAAIAA=</HashCode>
+      <FileName>MediaFile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMyDocManager" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAACAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyDocManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNiceSliderCtrl" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAgAEAgAAAAAAABAABAAAAEAAAAAAAAQAAA=</HashCode>
+      <FileName>NiceSlider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPictureFile">
+    <Position X="7" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PictureFile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVideoFile">
+    <Position X="9.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VideoFile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaInfoDLL::MediaInfo" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEEAAAAAIABAAAACCgAEAAACAAYAiAAAAACBABA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaInfoDLL::MediaInfoList" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAAAAAIABAAAACCAAEAAAAAAIgCAAAAAiAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="MediaSideDataHDR" Collapsed="true">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAEAAAAACAAAAAAAAAAAAAAAAAAAAAAAIMAAAAA=</HashCode>
+      <FileName>IMediaSideData.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MediaSideData3DOffset" Collapsed="true">
+    <Position X="16.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>IMediaSideData.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TrackElement" Collapsed="true">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAgAAAAAAAIAAAAABACAAAAQAAABAABAA=</HashCode>
+      <FileName>ITrackInfo.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TrackExtendedInfoVideo" Collapsed="true">
+    <Position X="23.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAAAgAAIAAAAAAAABAAgAAAAQQAAAAAAAAA=</HashCode>
+      <FileName>ITrackInfo.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TrackExtendedInfoAudio" Collapsed="true">
+    <Position X="21.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAEAAAAAAAAIAAAAAAABAAAAAAEAA=</HashCode>
+      <FileName>ITrackInfo.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="Playlistmode" Collapsed="true">
+    <Position X="14.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaFile.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_Char" Collapsed="true">
+    <Position X="19.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_int8u" Collapsed="true">
+    <Position X="23.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_int64u" Collapsed="true">
+    <Position X="21.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_stream_C" Collapsed="true">
+    <Position X="10.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_info_C" Collapsed="true">
+    <Position X="16.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_infooptions_C" Collapsed="true">
+    <Position X="20" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfo_fileoptions_C" Collapsed="true">
+    <Position X="16" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_New" Collapsed="true">
+    <Position X="25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_New" Collapsed="true">
+    <Position X="19.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Delete" Collapsed="true">
+    <Position X="26.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Delete" Collapsed="true">
+    <Position X="25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open" Collapsed="true">
+    <Position X="26.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Open" Collapsed="true">
+    <Position X="21.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open_Buffer_Init" Collapsed="true">
+    <Position X="21.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open_Buffer_Continue" Collapsed="true">
+    <Position X="16.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open_Buffer_Continue_GoTo_Get" Collapsed="true">
+    <Position X="18" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open_Buffer_Finalize" Collapsed="true">
+    <Position X="19.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Open_NextPacket" Collapsed="true">
+    <Position X="23.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Close" Collapsed="true">
+    <Position X="21.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Close" Collapsed="true">
+    <Position X="19.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Inform" Collapsed="true">
+    <Position X="19.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Inform" Collapsed="true">
+    <Position X="18" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_GetI" Collapsed="true">
+    <Position X="18" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_GetI" Collapsed="true">
+    <Position X="16.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Get" Collapsed="true">
+    <Position X="16.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Get" Collapsed="true">
+    <Position X="26.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Output_Buffer_Get" Collapsed="true">
+    <Position X="26.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Output_Buffer_GetI" Collapsed="true">
+    <Position X="16.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Option" Collapsed="true">
+    <Position X="25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Option" Collapsed="true">
+    <Position X="23.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_State_Get" Collapsed="true">
+    <Position X="18" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_State_Get" Collapsed="true">
+    <Position X="25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Count_Get" Collapsed="true">
+    <Position X="23.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Count_Get" Collapsed="true">
+    <Position X="21.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFO_Count_Get_Files" Collapsed="true">
+    <Position X="25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEDIAINFOLIST_Count_Get_Files" Collapsed="true">
+    <Position X="23.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::Char" Collapsed="true">
+    <Position X="16.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::String" Collapsed="true">
+    <Position X="16.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::StringStream" Collapsed="true">
+    <Position X="18" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::iStringStream" Collapsed="true">
+    <Position X="18" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::oStringStream" Collapsed="true">
+    <Position X="26.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::tiStringStream" Collapsed="true">
+    <Position X="19.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MediaInfoDLL::toStringStream" Collapsed="true">
+    <Position X="21.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Interface Name="IBitRateInfo" Collapsed="true">
+    <Position X="16.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>IBitRateInfo.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IBufferInfo" Collapsed="true">
+    <Position X="18" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IBufferInfo.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IDSMResourceBag" Collapsed="true">
+    <Position X="19.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAiAAAAAAAAAAAAAAAACQAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDSMResourceBag.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IGraphRebuildDelegate" Collapsed="true">
+    <Position X="21.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IGraphRebuildDelegate.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IKeyFrameInfo" Collapsed="true">
+    <Position X="23.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IKeyFrameInfo.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IMediaSample3D" Collapsed="true">
+    <Position X="21.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>IMediaSample3D.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IMediaSideData" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMediaSideData.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ISpecifyPropertyPages2" Collapsed="true">
+    <Position X="25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISpecifyPropertyPages2.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IStreamSourceControl" Collapsed="true">
+    <Position X="26.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IStreamSourceControl.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ITrackInfo" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAEAAABAAAAQAAAAAAAAAAAAACQEAAAABAAA=</HashCode>
+      <FileName>ITrackInfo.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILAVAudioSettings" Collapsed="true">
+    <Position X="25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQwCwAAAAJAAJgAAAIAJAJAUgIACKgFiEAkhgggIAGA=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILAVAudioStatus" Collapsed="true">
+    <Position X="26.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAABAAAEAAAAAAAAAACAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILAVFSettings" Collapsed="true">
+    <Position X="16.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KsQABgAAAgIAAAAIQIAAkASogSAAIggDATRAIEAATBg=</HashCode>
+      <FileName>LAVSplitterSettings.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILAVVideoSettings" Collapsed="true">
+    <Position X="18" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CoiASACAIAEeAgEIJmAC2IAsgAgICgAOwIAABEAFAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILAVVideoStatus" Collapsed="true">
+    <Position X="19.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="_playlistmode">
+    <Position X="14.5" Y="20.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>MediaFile.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TrackType" Collapsed="true">
+    <Position X="23.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAEAAACAAAAAAAAAAAAAAAQAAAAAAAACCAAAA=</HashCode>
+      <FileName>ITrackInfo.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVAudioCodec" Collapsed="true">
+    <Position X="21.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QwAQADAAAAABAAwAQAACABAAAIGCAUAAAAIAAEEBIGA=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVBitstreamCodec" Collapsed="true">
+    <Position X="26.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAgQAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVAudioSampleFormat" Collapsed="true">
+    <Position X="25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAAAgAAAAAAAQABAAAAAAgAAAAAAACAAAAAAg=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVAudioMixingMode" Collapsed="true">
+    <Position X="23.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAQAAAEAAAAA=</HashCode>
+      <FileName>LAVAudioSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVSubtitleMode" Collapsed="true">
+    <Position X="16.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAQQAAAAAAAAAAAACAA=</HashCode>
+      <FileName>LAVSplitterSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVVideoCodec">
+    <Position X="23.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAYQIoEAKAAEEgADRpICCEQBFgBgECAQyAwICBGwBA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVVideoHWCodec" Collapsed="true">
+    <Position X="19.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABIACAAAAAAAAAAAAAAAAAAAAAgAABAAAAYA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVHWAccel" Collapsed="true">
+    <Position X="23.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAIAAIAAAAAAAQAAAAAABAAAAQgAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVHWDeintModes" Collapsed="true">
+    <Position X="25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVSWDeintModes" Collapsed="true">
+    <Position X="18" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAEAAAAAAAAAAAAACAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVDeintMode" Collapsed="true">
+    <Position X="18" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAQBAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVDeintOutput" Collapsed="true">
+    <Position X="19.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVDeintFieldOrder" Collapsed="true">
+    <Position X="16.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVOutPixFmts" Collapsed="true">
+    <Position X="26.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAACAQBAAAAAAABAAAAAEAAAIFAAAAQSwAgAAAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LAVDitherMode" Collapsed="true">
+    <Position X="21.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LAVVideoSettings.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfo_stream_t">
+    <Position X="10.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAAAQAAAAAIAAAAAKAAAARAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfo_info_t">
+    <Position X="16.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAAAAAAIAAAAAAAAAACMBAAAAABAAAAAAAg=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfo_infooptions_t">
+    <Position X="20" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAABAAAAAAAAAAAAgAAEAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfo_fileoptions_t">
+    <Position X="16" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAgAQ=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfoDLL::stream_t" Collapsed="true">
+    <Position X="21.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAAAAAAAAAAAAFAEAAACABAAAIAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfoDLL::info_t" Collapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAEAEAAAAAAAAAAAAhACCAEAAAAAAAAAAAEA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfoDLL::infooptions_t" Collapsed="true">
+    <Position X="19.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAEAAAAIAEAAAAAABAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MediaInfoDLL::fileoptions_t" Collapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAgAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaInfoDLL.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

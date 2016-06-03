@@ -49,14 +49,15 @@ BEGIN_MESSAGE_MAP(CDSMPMFCView, CView)
     ON_MESSAGE(WM_GRAPHNOTIFY, &CDSMPMFCView::OnGraphnotify)
     ON_COMMAND(ID_PLAYLIST, &CDSMPMFCView::OnPlaylist)
     ON_UPDATE_COMMAND_UI(ID_FILE_SAVE, &CDSMPMFCView::OnUpdateFileSave)
-	ON_COMMAND(ID_MOD_SEQ, &CDSMPMFCView::OnModSeq)
-	ON_COMMAND(ID_MOD_LOOP, &CDSMPMFCView::OnModLoop)
-	ON_UPDATE_COMMAND_UI(ID_MOD_SEQ, &CDSMPMFCView::OnUpdateModSeq)
-	ON_UPDATE_COMMAND_UI(ID_MOD_LOOP, &CDSMPMFCView::OnUpdateModLoop)
-	ON_COMMAND(ID_LRC, &CDSMPMFCView::OnLrc)
-	ON_UPDATE_COMMAND_UI(ID_PLAYLIST, &CDSMPMFCView::OnUpdatePlaylist)
-	ON_UPDATE_COMMAND_UI(ID_LRC, &CDSMPMFCView::OnUpdateLrc)
-	ON_COMMAND(ID_MOD_SLOOP, &CDSMPMFCView::OnModSloop)
+    ON_COMMAND(ID_MOD_SEQ, &CDSMPMFCView::OnModSeq)
+    ON_COMMAND(ID_MOD_LOOP, &CDSMPMFCView::OnModLoop)
+    ON_UPDATE_COMMAND_UI(ID_MOD_SEQ, &CDSMPMFCView::OnUpdateModSeq)
+    ON_UPDATE_COMMAND_UI(ID_MOD_LOOP, &CDSMPMFCView::OnUpdateModLoop)
+    ON_COMMAND(ID_LRC, &CDSMPMFCView::OnLrc)
+    ON_UPDATE_COMMAND_UI(ID_PLAYLIST, &CDSMPMFCView::OnUpdatePlaylist)
+    ON_UPDATE_COMMAND_UI(ID_LRC, &CDSMPMFCView::OnUpdateLrc)
+    ON_COMMAND(ID_MOD_SLOOP, &CDSMPMFCView::OnModSloop)
+    ON_UPDATE_COMMAND_UI(ID_MOD_SLOOP, &CDSMPMFCView::OnUpdateModSloop)
 END_MESSAGE_MAP()
 
 // CDSMPMFCView 构造/析构
@@ -66,16 +67,17 @@ CDSMPMFCView::CDSMPMFCView()
     // TODO: 在此处添加构造代码
     m_dlgplaylist = new CDlgPlaylist();
     m_dlgplaylist->Create(IDD_DLG_PLIST);
-	m_dlglrc = new CDlgLrc();
-	m_dlglrc->Create(IDD_DLG_LRC);
+    m_dlglrc = new CDlgLrc();
+    m_dlglrc->Create(IDD_DLG_LRC);
 }
 
 CDSMPMFCView::~CDSMPMFCView()
 {
     if(m_dlgplaylist)
         delete m_dlgplaylist;
-	if (m_dlglrc)
-		delete m_dlglrc;
+
+    if(m_dlglrc)
+        delete m_dlglrc;
 }
 
 BOOL CDSMPMFCView::PreCreateWindow(CREATESTRUCT& cs)
@@ -188,6 +190,8 @@ void CDSMPMFCView::OnUpdateBtnPause(CCmdUI *pCmdUI)
 void CDSMPMFCView::OnFileInfo()
 {
     // TODO: 在此添加命令处理程序代码
+	if (GetDocument()->m_playlist.empty())
+		return;
     CDlgFileInfo dlg;
     MediaInfoDLL::MediaInfo mi;
     MediaInfoDLL::String str = mi.Option(L"Info_Version");
@@ -231,7 +235,9 @@ void CDSMPMFCView::OnBtnPlay()
     GetDocument()->m_pmf->Play(GetSafeHwnd());
     m_dlgplaylist->m_listbox.SetCurSel(GetDocument()->m_plist_selector);
     SetTimer(1, 1000, NULL);
-	SetTimer(2, 10, NULL);
+
+    if(m_dlglrc->m_list_lrc.GetCount())
+        SetTimer(2, 10, NULL);
 }
 
 
@@ -239,9 +245,12 @@ void CDSMPMFCView::OnBtnStop()
 {
     // TODO: 在此添加命令处理程序代码
     KillTimer(1);
+	if (m_dlglrc->m_list_lrc.GetCount())
+		KillTimer(2);
     m_pctrl->SetPos(0);
     CMainFrame* pFrame = (CMainFrame*)GetParent();
     CStatusBar* pSbar = pFrame->MainFrameGetStBar();
+	pSbar->SetPaneText(0, L"已停止");
     pSbar->SetPaneText(1, L"00:00:00/00:00:00");
     GetDocument()->m_pmf->Stop();
     ClearScreen();
@@ -290,12 +299,6 @@ void CDSMPMFCView::OnPaint()
     }
 
     ::EndPaint(hwnd, &ps);
-    //CString str;
-    //str.Format(L"%d,%d,%d,%d", rcClient.bottom, rcClient.top, rcClient.left, rcClient.right);
-    //CRect rect;
-    //GetClientRect(rect);
-    //dc.DrawText(str, rect, 0);
-    // 不为绘图消息调用 CView::OnPaint()
 }
 
 
@@ -312,19 +315,17 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
         CMainFrame* pFrame = (CMainFrame*)GetParent();
         CStatusBar* pSbar = pFrame->MainFrameGetStBar();
         auto pSeek = GetDocument()->m_pmf->pSeeking;
-        //ns
+        //获取时间10^(-7)s
         pSeek->GetCurrentPosition(&curtime);
 
         if(curtime != 0)
         {
-            //change to second
+            //转换为秒
             tns = int(curtime / 10000000);
             thh = tns / 3600;
             tmm = (tns % 3600) / 60;
-			tss = (tns % 60);
+            tss = (tns % 60);
             curtimestr.Format(_T("%02d:%02d:%02d"), thh, tmm, tss);
-            //m_curtime.SetWindowText(curtimestr);
-            //pSbar->SetPaneText(0, curtimestr);
         }
 
         pSeek->GetDuration(&duration);
@@ -336,10 +337,8 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
             tmm = (tns % 3600) / 60;
             tss = (tns % 60);
             durationstr.Format(_T("%02d:%02d:%02d"), thh, tmm, tss);
-            //m_duration.SetWindowText(durationstr);
             progress = int(curtime * 1000 / duration);
             m_pctrl->SetPos(progress);
-            //TRACE("%d\n", m_pctrl->GetPos());
         }
 
         CString text;
@@ -347,34 +346,34 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
         pSbar->SetPaneText(0, text);
         pSbar->SetPaneText(1, curtimestr + L"/" + durationstr);
     }
-	else if(nIDEvent==2)
-	{
-		CString curtimestr;
-		long long curtime = 0;
-		long long duration = 0;
-		int tns, tmm, tss, tms;
-		CMainFrame* pFrame = (CMainFrame*)GetParent();
-		CStatusBar* pSbar = pFrame->MainFrameGetStBar();
-		auto pSeek = GetDocument()->m_pmf->pSeeking;
-		//ns
-		pSeek->GetCurrentPosition(&curtime);
+    else if(nIDEvent == 2)
+    {
+        CString curtimestr;
+        long long curtime = 0;
+        long long duration = 0;
+        int tns, tmm, tss, tms;
+        CMainFrame* pFrame = (CMainFrame*)GetParent();
+        CStatusBar* pSbar = pFrame->MainFrameGetStBar();
+        auto pSeek = GetDocument()->m_pmf->pSeeking;
+        //获取时间10^(-7)s
+        pSeek->GetCurrentPosition(&curtime);
 
-		if (curtime != 0)
-		{
-			//change to mini second
-			tns = int(curtime / 10000);
-			tmm = tns / 60000;
-			tss = (tns % 60000) / 1000;
-			tms = (tns % 1000) / 100;
-			curtimestr.Format(L"%02d:%02d.%d",  tmm, tss, tms);
-			std::wstring tstr(curtimestr.GetString());
-			TRACE(L"%d\n",GetDocument()->m_lrc_selector.count(tstr.c_str()));
-			//if(GetDocument()->m_lrc_selector.count(tstr.c_str()))
-			//	TRACE(tstr.c_str());
-			if (m_dlglrc->m_list_lrc.GetCount() && GetDocument()->m_lrc_selector.count(tstr.c_str()))
-				m_dlglrc->m_list_lrc.SetCurSel(GetDocument()->m_lrc_selector[tstr.c_str()]);
-		}
-	}
+        if(curtime != 0)
+        {
+            //转换为毫秒
+            tns = int(curtime / 10000);
+            tmm = tns / 60000;
+            tss = (tns % 60000) / 1000;
+            tms = (tns % 1000) / 100;
+            curtimestr.Format(L"%02d:%02d.%d",  tmm, tss, tms);
+            std::wstring tstr(curtimestr.GetString());
+            TRACE(L"%d\n", GetDocument()->m_lrc_selector.count(tstr));
+
+            if(m_dlglrc->m_list_lrc.GetCount() && GetDocument()->m_lrc_selector.count(tstr))
+                m_dlglrc->m_list_lrc.SetCurSel(GetDocument()->m_lrc_selector[tstr]);
+        }
+    }
+
     CView::OnTimer(nIDEvent);
 }
 
@@ -382,7 +381,11 @@ void CDSMPMFCView::OnTimer(UINT_PTR nIDEvent)
 void CDSMPMFCView::OnInitialUpdate()
 {
     CView::OnInitialUpdate();
+
     // TODO: 在此添加专用代码和/或调用基类
+    if(GetDocument()->m_pmf->isPlaying)
+        OnBtnStop();
+
     m_pctrl = (CNiceSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_PRG));
     m_vctrl = (CNiceSliderCtrl*)(GetParent()->GetDlgItem(IDD_DIALOGBAR_CTL)->GetDlgItem(IDC_SLIDER_VOL));
     m_dlgplaylist->SetWindowTextW(L"播放列表");
@@ -390,16 +393,21 @@ void CDSMPMFCView::OnInitialUpdate()
 
     while(m_dlgplaylist->m_listbox.GetCount())
         m_dlgplaylist->m_listbox.DeleteString(0);
-	while (m_dlglrc->m_list_lrc.GetCount())
-		m_dlglrc->m_list_lrc.DeleteString(0);
+
+    while(m_dlglrc->m_list_lrc.GetCount())
+        m_dlglrc->m_list_lrc.DeleteString(0);
+
     if(GetDocument()->m_isPlaylist)
         m_dlgplaylist->SetWindowTextW(GetDocument()->GetPathName());
-	
+
     for(auto x : GetDocument()->m_playlist)
     {
         m_dlgplaylist->m_listbox.AddString(x);
     }
-	UpdateLrcIndex();
+
+    UpdateLrcIndex();
+    //if(GetDocument()->m_playlist.size())
+    //OnBtnPlay();
 }
 
 
@@ -419,12 +427,12 @@ void CDSMPMFCView::OnBtnBack()
 {
     TRACE("OnBtnBack\t%d", GetDocument()->HasNextOrPri(false));
 
-	if (GetDocument()->HasNextOrPri(false))
-		if (GetDocument()->m_plist_selector == 0)
-			GetDocument()->m_plist_selector = GetDocument()->m_playlist.size() - 1;
-		else
-			GetDocument()->m_plist_selector--;
-		
+    if(GetDocument()->HasNextOrPri(false))
+        if(GetDocument()->m_plist_selector == 0)
+            GetDocument()->m_plist_selector = GetDocument()->m_playlist.size() - 1;
+        else
+            GetDocument()->m_plist_selector--;
+
     if(GetDocument()->m_pmf->isPlaying)
         OnBtnStop();
 
@@ -458,7 +466,6 @@ void CDSMPMFCView::OnBtnFs()
 void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
     // TODO: 在此添加消息处理程序代码和/或调用默认值
-    //AfxMessageBox(L"KEYDOWN");
     switch(nChar)
     {
         case VK_F11:
@@ -470,6 +477,12 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
         case VK_F9:
             {
                 OnFileInfo();
+                break;
+            }
+
+        case VK_F8:
+            {
+                OnPlaylist();
                 break;
             }
 
@@ -496,6 +509,8 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
         case VK_RIGHT:
             {
+				if (!GetDocument()->m_pmf->isPlaying)
+					break;
                 int nPos = m_pctrl->GetPos() + 50;
 
                 if(nPos > 1000)
@@ -508,6 +523,8 @@ void CDSMPMFCView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
         case VK_LEFT:
             {
+				if (!GetDocument()->m_pmf->isPlaying)
+					break;
                 int nPos = m_pctrl->GetPos() - 50;
 
                 if(nPos < 0)
@@ -594,7 +611,8 @@ HRESULT CDSMPMFCView::ClearScreen()
 afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
 {
     LONG   eventCode = 0, eventParam1 = 0, eventParam2 = 0;
-
+	CMainFrame* pFrame = (CMainFrame*)GetParent();
+	CStatusBar* pSbar = pFrame->MainFrameGetStBar();
     while(SUCCEEDED(GetDocument()->m_pmf->pEvent->GetEvent(&eventCode, &eventParam1, &eventParam2, 0)))
     {
         // Spin through the events
@@ -609,6 +627,13 @@ afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
         {
             case EC_COMPLETE:
                 {
+					pSbar->SetPaneText(0, L"已停止");
+                    if(GetDocument()->m_isSingleloop)
+                    {
+                        OnBtnPlay();
+                        break;
+                    }
+
                     if(GetDocument()->HasNextOrPri(true))
                         OnBtnNext();
                     else
@@ -616,7 +641,6 @@ afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
 
                     break;
                 }
-
             case EC_USERABORT:
             case EC_ERRORABORT:
                 {
@@ -635,10 +659,10 @@ afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
 void CDSMPMFCView::OnPlaylist()
 {
     // TODO: 在此添加命令处理程序代码
-	if (!m_dlgplaylist->m_isOpen)
-		m_dlgplaylist->ShowWindow(SW_SHOW);
-	else
-		m_dlgplaylist->ShowWindow(SW_HIDE);
+    if(!m_dlgplaylist->m_isOpen)
+        m_dlgplaylist->ShowWindow(SW_SHOW);
+    else
+        m_dlgplaylist->ShowWindow(SW_HIDE);
 }
 
 
@@ -651,128 +675,144 @@ void CDSMPMFCView::OnUpdateFileSave(CCmdUI *pCmdUI)
 
 void CDSMPMFCView::OnModSeq()
 {
-	// TODO: 在此添加命令处理程序代码
-	GetDocument()->m_playlistmode = Playlistmode::sequence;
+    // TODO: 在此添加命令处理程序代码
+    GetDocument()->m_playlistmode = Playlistmode::sequence;
 }
 
 
 void CDSMPMFCView::OnModLoop()
 {
-	// TODO: 在此添加命令处理程序代码
-	GetDocument()->m_playlistmode = Playlistmode::loop;
+    // TODO: 在此添加命令处理程序代码
+    GetDocument()->m_playlistmode = Playlistmode::loop;
 }
 
 
 void CDSMPMFCView::OnUpdateModSeq(CCmdUI *pCmdUI)
 {
-	// TODO: 在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(GetDocument()->m_playlistmode == Playlistmode::sequence);
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    pCmdUI->SetCheck(GetDocument()->m_playlistmode == Playlistmode::sequence);
 }
 
 
 void CDSMPMFCView::OnUpdateModLoop(CCmdUI *pCmdUI)
 {
-	// TODO: 在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(GetDocument()->m_playlistmode == Playlistmode::loop);
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    pCmdUI->SetCheck(GetDocument()->m_playlistmode == Playlistmode::loop);
 }
 
 
 void CDSMPMFCView::OnLrc()
 {
-	// TODO: 在此添加命令处理程序代码
-	if (!m_dlglrc->m_isOpen)
-		m_dlglrc->ShowWindow(SW_SHOW);
-	else
-		m_dlglrc->ShowWindow(SW_HIDE);
+    // TODO: 在此添加命令处理程序代码
+    if(!m_dlglrc->m_isOpen)
+        m_dlglrc->ShowWindow(SW_SHOW);
+    else
+        m_dlglrc->ShowWindow(SW_HIDE);
 }
 
 
-void CDSMPMFCView::RstrToUnicode(CString& str,UINT CodePage)
+void CDSMPMFCView::RstrToUnicode(CString& str, UINT CodePage)
 {
-	char *szBuf = new char[str.GetLength() + 1];//注意“+1”，char字符要求结束符，而CString没有
-	memset(szBuf, '\0', str.GetLength());
+    char *szBuf = new char[str.GetLength() + 1];//注意“+1”，char字符要求结束符，而CString没有
+    memset(szBuf, '\0', str.GetLength());
+    int i;
 
-	int i;
-	for (i = 0; i < str.GetLength(); i++)
-	{
-		szBuf[i] = (char)str.GetAt(i);
-	}
-	szBuf[i] = '\0';//结束符。否则会在末尾产生乱码。
+    for(i = 0; i < str.GetLength(); i++)
+    {
+        szBuf[i] = (char)str.GetAt(i);
+    }
 
-	int nLen;
-	WCHAR *ptch;
-	CString strOut;
-	if (szBuf == NULL)
-	{
-		return;
-	}
-	nLen = MultiByteToWideChar(CodePage, 0, szBuf, -1, NULL, 0);//获得需要的宽字符字节数
-	ptch = new WCHAR[nLen];
-	memset(ptch, '\0', nLen);
-	MultiByteToWideChar(CodePage, 0, szBuf, -1, ptch, nLen);
-	str.Format(_T("%s"), ptch);
+    szBuf[i] = '\0';//结束符。否则会在末尾产生乱码。
+    int nLen;
+    WCHAR *ptch;
+    CString strOut;
 
-	if (NULL != ptch)
-		delete[] ptch;
-	ptch = NULL;
+    if(szBuf == NULL)
+    {
+        return;
+    }
 
-	if (NULL != szBuf)
-		delete[]szBuf;
-	szBuf = NULL;
+    nLen = MultiByteToWideChar(CodePage, 0, szBuf, -1, NULL, 0);//获得需要的宽字符字节数
+    ptch = new WCHAR[nLen];
+    memset(ptch, '\0', nLen);
+    MultiByteToWideChar(CodePage, 0, szBuf, -1, ptch, nLen);
+    str.Format(_T("%s"), ptch);
+
+    if(NULL != ptch)
+        delete[] ptch;
+
+    ptch = NULL;
+
+    if(NULL != szBuf)
+        delete[]szBuf;
+
+    szBuf = NULL;
 }
 
 
 void CDSMPMFCView::UpdateLrcIndex()
 {
-	CStdioFile lrcfile;
-	CString text, tindex;
-	int index;
-	CString lrcname = L"";
-	if (GetDocument()->m_playlist.size())
-		lrcname = GetDocument()->m_playlist.at(GetDocument()->m_plist_selector);
-	lrcname = lrcname.Left(lrcname.ReverseFind('.'));
-	lrcname.Append(L".lrc");
-	TRACE(lrcname);
-	if (lrcfile.Open(lrcname, CStdioFile::modeRead))
-	{
-		index = 0;
-		while (lrcfile.ReadString(text))
-		{
-			RstrToUnicode(text, CP_UTF8);
-			tindex = text.Left(text.Find(']'));
-			text = text.Right(text.GetLength() - text.Find(']') - 1);
-			tindex = tindex.Mid(1,tindex.GetLength()-2);
-			if (text != L"")
-			{
-				m_dlglrc->m_list_lrc.AddString(text);
-				std::wstring tstr(tindex);
-				tstr.append(1, 0);
-				GetDocument()->m_lrc_selector[tstr.c_str()] = index++;
-				TRACE(L"%d%s\n", GetDocument()->m_lrc_selector.count(tstr.c_str()), tstr.c_str());
-			}
-		}
-		lrcfile.Close();
-	}
+    CStdioFile lrcfile;
+    CString text, tindex;
+    int index;
+    CString lrcname = L"";
+
+    if(GetDocument()->m_playlist.size())
+        lrcname = GetDocument()->m_playlist.at(GetDocument()->m_plist_selector);
+
+    lrcname = lrcname.Left(lrcname.ReverseFind('.'));
+    lrcname.Append(L".lrc");
+    TRACE(lrcname);
+
+    if(lrcfile.Open(lrcname, CStdioFile::modeRead))
+    {
+        index = 0;
+
+        while(lrcfile.ReadString(text))
+        {
+            RstrToUnicode(text, CP_UTF8);
+            tindex = text.Left(text.Find(']'));
+            text = text.Right(text.GetLength() - text.Find(']') - 1);
+            tindex = tindex.Mid(1, tindex.GetLength() - 2);
+
+            if(text != L"")
+            {
+                m_dlglrc->m_list_lrc.AddString(text);
+                std::wstring tstr(tindex);
+                tstr.append(1, 0);
+                GetDocument()->m_lrc_selector[tstr.c_str()] = index++;
+                TRACE(L"%d%s\n", GetDocument()->m_lrc_selector.count(tstr.c_str()), tstr.c_str());
+            }
+        }
+
+        lrcfile.Close();
+    }
 }
 
 
 void CDSMPMFCView::OnUpdatePlaylist(CCmdUI *pCmdUI)
 {
-	// TODO: 在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(m_dlgplaylist->m_isOpen);
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    pCmdUI->SetCheck(m_dlgplaylist->m_isOpen);
 }
 
 
 void CDSMPMFCView::OnUpdateLrc(CCmdUI *pCmdUI)
 {
-	// TODO: 在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(m_dlglrc->m_isOpen);
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    pCmdUI->SetCheck(m_dlglrc->m_isOpen);
 }
 
 
 void CDSMPMFCView::OnModSloop()
 {
-	// TODO: 在此添加命令处理程序代码
-	GetDocument()->m_isSingleloop = !GetDocument()->m_isSingleloop;
+    // TODO: 在此添加命令处理程序代码
+    GetDocument()->m_isSingleloop = !GetDocument()->m_isSingleloop;
+}
 
+
+void CDSMPMFCView::OnUpdateModSloop(CCmdUI *pCmdUI)
+{
+    // TODO: 在此添加命令更新用户界面处理程序代码
+    pCmdUI->SetCheck(GetDocument()->m_isSingleloop);
 }

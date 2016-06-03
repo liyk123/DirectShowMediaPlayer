@@ -115,7 +115,8 @@
     </ResourceCompile>
     <PostBuildEvent>
       <Command>Copy  "$(ProjectDir)LAVFilters-0.68.1-x86\*.*"  "$(OutDir)"
-Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
+Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"
+Copy  "$(ProjectDir)MediaInfo\*.*"  "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -172,6 +173,11 @@ Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>Copy  "$(ProjectDir)LAVFilters-0.68.1-x86\*.*"  "$(OutDir)"
+Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"
+Copy  "$(ProjectDir)MediaInfo\*.*"  "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -298,6 +304,7 @@ Copy  "$(ProjectDir)xy-VSFilter_x86\*.*"  "$(OutDir)"</Command>
     <None Include="..\..\..\LAVFilters-0.68.1-x86\swscale-lav-4.dll">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
     </None>
+    <None Include="ClassDiagram.cd" />
     <None Include="DSMPMFC.reg" />
     <None Include="MediaInfo.dll">
       <DeploymentContent>true</DeploymentContent>
