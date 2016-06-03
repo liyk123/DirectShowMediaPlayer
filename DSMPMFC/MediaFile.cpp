@@ -12,7 +12,7 @@ CMediaFile::CMediaFile(): CObject()
 {
     name = L"";
     pSeeking = NULL;
-    ppWc = NULL;
+    ppVMRwctl = NULL;
     pControl = NULL;
     pEvent = NULL;
     pGraph = NULL;
@@ -62,8 +62,8 @@ BOOL CMediaFile::Releases()
     if(pAudio)
         pAudio->Release();
 
-    if(ppWc)
-        ppWc->Release();
+    if(ppVMRwctl)
+        ppVMRwctl->Release();
 
     if(pSeeking)
         pSeeking->Release();
@@ -85,7 +85,7 @@ HRESULT CMediaFile::InitWindowlessVMR(HWND hwndApp)
     if(!pGraph) return E_POINTER;
 
     pVmr = NULL;
-    IVMRWindowlessControl* pWc = NULL;
+    IVMRWindowlessControl* pVMRwctl = NULL;
     // 创建VMR
     HRESULT hr = CoCreateInstance(CLSID_VideoMixingRenderer, NULL,
                                   CLSCTX_INPROC, IID_IBaseFilter, (void**)&pVmr);
@@ -117,19 +117,19 @@ HRESULT CMediaFile::InitWindowlessVMR(HWND hwndApp)
     if(SUCCEEDED(hr))
     {
         // 设置窗体
-        hr = pVmr->QueryInterface(IID_IVMRWindowlessControl, (void**)&pWc);
+        hr = pVmr->QueryInterface(IID_IVMRWindowlessControl, (void**)&pVMRwctl);
 
         if(SUCCEEDED(hr))
         {
-            hr = pWc->SetVideoClippingWindow(hwndApp);
+            hr = pVMRwctl->SetVideoClippingWindow(hwndApp);
 
             if(SUCCEEDED(hr))
             {
-                ppWc = pWc; //返回AddRef指针
+                ppVMRwctl = pVMRwctl; //返回AddRef指针
             }
             else
             {
-                pWc->Release();
+                pVMRwctl->Release();
             }
         }
     }
@@ -170,23 +170,22 @@ void CMediaFile::Play(HWND hwndView)
         return;
     }
 
-    auto g_pWc = ppWc;
-    hr = g_pWc->GetNativeVideoSize(&width, &height, NULL, NULL);
+    hr = ppVMRwctl->GetNativeVideoSize(&width, &height, NULL, NULL);
 
     if(SUCCEEDED(hr) && width + height)
     {
-        RECT rcSrc, rcDest;
-        // 设置Source尺寸
-        SetRect(&rcSrc, 0, 0, width, height);
+        RECT rectSrc, rectDst;
+        // 设置源尺寸
+        SetRect(&rectSrc, 0, 0, width, height);
         TRACE("%d\t%d\n", width, height);
         // 获得显示窗体的客户区尺寸
-        ::GetClientRect(hwndView, &rcDest);
-        //设置destination尺寸
-        SetRect(&rcDest, 0, 0, rcDest.right, rcDest.bottom);
-        TRACE("%d\t%d\t%f\n", rcDest.right, rcDest.bottom, width * 1.0 / height);
+        ::GetClientRect(hwndView, &rectDst);
+        //设置目标显示尺寸
+        SetRect(&rectDst, 0, 0, rectDst.right, rectDst.bottom);
+        TRACE("%d\t%d\t%f\n", rectDst.right, rectDst.bottom, width * 1.0 / height);
         // 视频定位
-        g_pWc->SetAspectRatioMode(VMR_ARMODE_LETTER_BOX);
-        hr = g_pWc->SetVideoPosition(&rcSrc, &rcDest);
+		ppVMRwctl->SetAspectRatioMode(VMR_ARMODE_LETTER_BOX);
+        hr = ppVMRwctl->SetVideoPosition(&rectSrc, &rectDst);
     }
 
     HWND dlg_hwnd = NULL;

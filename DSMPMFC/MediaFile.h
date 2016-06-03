@@ -24,6 +24,7 @@ public:
 	IMediaEventEx *pEvent;
 	IBasicAudio *pAudio;
 	IBaseFilter *pVmr;
+	IMediaEventSink *a;
 	long m_volume;
 	long width;
 	long height;
@@ -33,7 +34,7 @@ public:
 	//IBasicAudio *pAudio;
 	//IVideoWindow *pWindow;
 	IMediaSeeking *pSeeking;
-	IVMRWindowlessControl* ppWc;
+	IVMRWindowlessControl* ppVMRwctl;
 	HRESULT InitWindowlessVMR(HWND hwndApp);
 	virtual ~CMediaFile();
 	void Play(HWND hwndView);

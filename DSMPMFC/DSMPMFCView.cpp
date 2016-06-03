@@ -262,36 +262,36 @@ void CDSMPMFCView::OnPaint()
     CPaintDC dc(this); // device context for painting
     // TODO: 在此处添加消息处理程序代码
     PAINTSTRUCT ps;
-    RECT        rcClient, rc2, g_rcDest;
+    RECT        rcClt, rc2, g_rctDst;
     HWND hwnd = GetSafeHwnd();
-    ::GetClientRect(hwnd, &rcClient);
+    ::GetClientRect(hwnd, &rcClt);
     GetClientRect(&rc2);
     ::BeginPaint(hwnd, &ps);
     auto pf = GetDocument()->m_pmf;
-    auto g_pWc = pf->ppWc;
-    SetRect(&g_rcDest, 0, 0, rcClient.bottom - pf->width, rcClient.top - pf->height);
+    auto g_pVwctl = pf->ppVMRwctl;
+    SetRect(&g_rctDst, 0, 0, rcClt.bottom - pf->width, rcClt.top - pf->height);
 
-    if(g_pWc != NULL && pf->width + pf->height)
+    if(g_pVwctl != NULL && pf->width + pf->height)
     {
         // 查找窗体需要重绘的客户区，该区域应该减去视频显示的区域
-        // g_rcDest 是已经计算好了的区域
-        HRGN rgnClient = CreateRectRgnIndirect(&rcClient);
-        HRGN rgnVideo = CreateRectRgnIndirect(&g_rcDest);
-        CombineRgn(rgnClient, rgnClient, rgnVideo, RGN_DIFF);
+        // g_rctDst 是已经计算好了的区域
+        HRGN rgnClt = CreateRectRgnIndirect(&rcClt);
+        HRGN rgnVd = CreateRectRgnIndirect(&g_rctDst);
+        CombineRgn(rgnClt, rgnClt, rgnVd, RGN_DIFF);
         // 重绘窗体
         HBRUSH hbr = (HBRUSH)GetStockObject(BLACK_BRUSH);
-        FillRgn(dc, rgnClient, hbr);
+        FillRgn(dc, rgnClt, hbr);
         // 释放对象
         DeleteObject(hbr);
-        DeleteObject(rgnClient);
-        DeleteObject(rgnVideo);
-        // 请求VMR to 重绘视频
+        DeleteObject(rgnClt);
+        DeleteObject(rgnVd);
+        // 请求VMR重绘视频
         RECT rcSrc;
-        // 设置Source尺寸
+        // 设置视频源的尺寸
         SetRect(&rcSrc, 0, 0, pf->width, pf->height);
         // 视频定位
-        HRESULT hr = g_pWc->SetVideoPosition(&rcSrc, &rcClient);
-        hr = g_pWc->RepaintVideo(hwnd, dc);
+        HRESULT hr = g_pVwctl->SetVideoPosition(&rcSrc, &rcClt);
+        hr = g_pVwctl->RepaintVideo(hwnd, dc);
     }
     else  // 没有视频显示，重绘整个客户区
     {
@@ -613,15 +613,14 @@ afx_msg LRESULT CDSMPMFCView::OnGraphnotify(WPARAM wParam, LPARAM lParam)
     LONG   eventCode = 0, eventParam1 = 0, eventParam2 = 0;
 	CMainFrame* pFrame = (CMainFrame*)GetParent();
 	CStatusBar* pSbar = pFrame->MainFrameGetStBar();
-    while(SUCCEEDED(GetDocument()->m_pmf->pEvent->GetEvent(&eventCode, &eventParam1, &eventParam2, 0)))
+    if(GetDocument()->m_pmf->pEvent->GetEvent(&eventCode, &eventParam1, &eventParam2, 0)==S_OK)
     {
-        // Spin through the events
         long long duration;
         GetDocument()->m_pmf->pEvent->FreeEventParams(eventCode, eventParam1, eventParam2);
         GetDocument()->m_pmf->pSeeking->GetDuration(&duration);
 
         if(duration == 0)
-            continue;
+            return 0;
 
         switch(eventCode)
         {
